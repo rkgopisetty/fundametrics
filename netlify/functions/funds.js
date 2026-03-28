@@ -5,7 +5,7 @@ exports.handler = async function (event) {
       "midcap": "Mid-Cap",
       "smallcap": "Small-Cap",
       "largecap": "Large-Cap",
-      "flexicap": "Flexi-Cap",
+      "flexicap": "Flexi Cap",
       "multicap": "Multi-Cap",
       "contra": "Contra"
     };
