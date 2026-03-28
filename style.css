@@ -1,0 +1,1293 @@
+/* 🌐 Base Typography */
+body {
+  font-family: 'Roboto', 'Segoe UI', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #444;
+  background-color: #f4f4f4;
+  padding: 0 rem;
+  letter-spacing: 0.2px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: #333;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: #333;
+  text-align: center;
+  margin-top: 0rem;
+  margin-bottom: 0.5rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #007bff;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1rem;
+  font-weight: 300;
+  color: #666;
+  margin-bottom: 0.75rem;
+}
+
+p {
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: #444;
+}
+
+.accent {
+  color: #007bff;
+  font-weight: 400;
+}
+
+
+
+.intro-section {
+  background-color: #f9f9fc;
+  padding: 2rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  max-width: 800px;
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.intro-section h2 {
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin-bottom: 0.25rem;
+  margin-top: 0.25rem;
+  color: #333;
+}
+
+.intro-section p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #555;
+}
+
+/* 🧭 Navigation Menu */
+.nav-container {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #f4f4f4;
+  padding: 0.5rem 1rem; /* This keeps spacing from viewport edge */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Left-align logo + menu */
+  gap: 20px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 0.25rem;
+}
+
+.logo-left img {
+  height: 90px;
+  width: auto;
+}
+
+.menu-bar {
+  background-color: #605bec;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 82%;
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.menu li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 12pt;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.menu li a:hover {
+  background-color: #5f4fe0;
+}
+
+.menu li a.active {
+  background-color: #fff;
+  color: #453fec;
+}
+
+#fundTable thead .category-average {
+  background-color: #452c63;
+  color: white;
+  font-weight: 500;
+}
+
+#fundTable thead .category-average th {
+  padding: 6px 8px;
+  border-top: 2px solid #ccc;
+}
+
+
+/* 📊 Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+  overflow: hidden;
+  table-layout: auto;
+}
+
+thead {
+  background-color: #5b3f86;
+  color: white;
+}
+
+th, td {
+  font-size: 10pt;
+  padding: 10px 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+th {
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+}
+
+td {
+  border-bottom: 1px solid #eee;
+}
+
+th.sorted-asc::after {
+  content: " ↑";
+}
+
+th.sorted-desc::after {
+  content: " ↓";
+}
+
+th:first-child, td:first-child {
+  text-align: left;
+}
+
+th:nth-child(5), td:nth-child(5),
+th[data-index="4"], td[data-index="4"] {
+  text-align: right;
+}
+
+#fundTable tbody tr.odd-row {
+  background-color: #cad7f2;
+}
+
+#fundTable tbody tr.even-row {
+  background-color: #d8dfeb;
+}
+
+#fundTable tbody tr:hover {
+  background-color: #dbeeff;
+}
+
+
+
+.table-wrapper {
+  overflow-x: auto;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.table-heading {
+  margin-bottom: 12px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+/* ⏱ Time Range Selector */
+.time-range-selector {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.time-range-selector button {
+  padding: 6px 16px; /* match peer-tab */
+  border: 1px solid #ccc;
+  background-color: #d3d3d3; /* medium gray for neutral base */
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 450;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+.time-range-selector button.active {
+  background-color: #009688; /* teal accent for active state */
+  color: white;
+  border-color: #009688;
+}
+
+
+/* 🗂 Category Cards */
+.top-fund-categories {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.top-fund-tables {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+
+.category-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.category-card {
+  flex: 0 0 160px; /* Fixed width */
+  height: 110px;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.category-card {
+  text-decoration: none;
+  color: inherit;
+}
+
+.category-card  {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #333;
+  margin-bottom: 0rem;
+  font-family: 'Roboto', 'Segoe UI', sans-serif;
+  text-align: center;
+}
+
+.category-card h3 {
+  text-decoration: none;
+}
+
+.category-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,123,255,0.05), rgba(0,123,255,0.15));
+  z-index: 0;
+  border-radius: 12px;
+}
+
+.category-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.category-card .fund-icon {
+  font-size: 36px;
+  transition: transform 0.3s ease;
+}
+
+.category-card:hover {
+  transform: scale(1.10);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.category-card:hover .fund-icon {
+  transform: scale(1.2);
+}
+
+
+
+/* 🧩 Feature Section */
+.features-section {
+  margin-top: 0.25rem;
+  text-align: center;
+  background-color: #fefefe;
+  border-radius: 12px;
+  padding: 2rem 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.features-section h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  padding: 0 1rem;
+}
+
+@media (max-width: 900px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.feature-step {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.feature-step::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,123,255,0.05), rgba(0,123,255,0.15));
+  opacity: 1;
+  z-index: 0;
+}
+
+.feature-step:hover {
+  background-color: #f0f8ff;
+  box-shadow: 0 12px 28px rgba(0,123,255,0.2);
+  transform: scale(1.10);
+}
+
+.feature-step h3,
+.feature-step p {
+  position: relative;
+  z-index: 1;
+}
+
+.feature-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #007bff;
+  transition: transform 0.3s ease;
+  transform-origin: center center;
+  display: block;
+  text-align: center;
+}
+
+.feature-step:hover .feature-icon {
+  transform: scale(1.8);
+}
+
+.fund-section-heading {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #333;
+  margin: 1rem 0 1rem;
+}
+
+#categoryFilter {
+  font-size: 14px;
+  font-family: 'Roboto', 'Segoe UI', sans-serif;
+  font-weight: 550;  /* Match fund-group select */
+  /*padding: 0.4rem 0.5rem; /* Match fund-group select */
+  padding: 5px 15px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9; /* Match fund-group select */
+  color: #333;
+  margin-bottom: 0rem;
+  appearance: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+
+.fund-selectors {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: nowrap; /* 👈 Prevent wrapping */
+  margin-top: 0rem;
+  overflow-x: auto;   /* 👈 Allow horizontal scroll if needed */
+}
+
+
+.fund-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+}
+
+.fund-group label {
+  display: inline-block;       /* Prevent full-width stretch */
+  max-width: max-content;      /* Shrink to fit text */
+  background-color: #c5d8ff;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-bottom: 0.5rem;
+}
+
+.fund-group select {
+  padding: 5px 15px;
+  font-family: 'Roboto', 'Segoe UI', sans-serif;
+  font-size: 14px;
+  font-weight: 550;
+  color: #333;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  appearance: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fund-group select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+  outline: none;
+}
+
+.fund-group select:disabled {
+  background-color: #eee;
+  color: #999;
+  cursor: not-allowed;
+}
+
+.submit-section {
+  margin-top: 1rem;
+}
+
+#submit-funds {
+  padding: 6px 16px;
+  font-size: 14px;
+  font-weight: 450;
+  background-color: #009688; /* Teal accent */
+  color: white;
+  border: 1px solid #009688;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 0rem;
+  transition: background-color 0.2s ease;
+}
+
+#submit-funds:hover {
+  background-color: #00796b; /* Slightly darker teal for hover */
+}
+
+
+#submit-funds:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+select {
+  background-color: #fff; /* Default background */
+  transition: background-color 0.3s ease;
+}
+
+select.highlighted {
+  background-color: #e6f2ff; /* Light blue when selected */
+}
+/* 🟢 Description Box */
+.category-description-box {
+  color: #228B22;
+  background: none;
+  border: none;
+  margin: 16px 0 8px 0; /* Adds space above and below */
+  padding: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  box-shadow: none;
+  transition: opacity 0.4s ease;
+  opacity: 0;
+}
+
+.category-description-box.show {
+  opacity: 1;
+}
+
+/* 🔘 Category Section */
+.top-fund-categories {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* 🔴 Fund Section Headings (e.g. #MidCap-heading) */
+.fund-section-heading {
+  margin-top: 1rem;
+  padding-top: 0;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #555; /* Matches home page gray tone */
+  line-height: 1.4;
+}
+
+.star {
+  font-size: 1.2em;
+  margin-right: 2px;
+}
+
+.star.filled {
+  color: gold;
+}
+
+.star.empty {
+  color: #ccc;
+}
+
+th.sorted-desc::after {
+  content: " ↓";
+  white-space: nowrap;
+  margin-left: 4px;
+}
+.top-fund-tables th {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 8px 10px;
+  font-size: 0.9em;
+  font-weight: 600;
+  text-align: left;
+}
+
+
+.sort-arrow {
+  font-weight: normal;
+  font-size: 0.9em;
+  color: #fff; /* or #ccc for subtle tone */
+}
+
+.top-fund-tables th:last-child {
+  min-width: 100px;
+}
+
+.fund-table {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+/* 1️⃣ Top Header Row */
+.top-header {
+  background-color: #5b3f86;
+  color: #ffffff;
+  font-weight: bold;
+  border-bottom: 2px solid #4a2f6b;
+  padding: 8px;
+  text-align: center;
+}
+
+/* 2️⃣ Middle Section Header Row */
+.section-header th.blank-header {
+  background-color: #ffffff;
+  border-bottom: 2px solid #ddd;
+}
+
+.section-header th.grouped-header {
+  background-color: #7457A0;
+  border-bottom: 2px solid #5b3f86;
+  padding: 6px 8px;
+  text-align: center;
+  color: #fff;
+}
+
+.group-label {
+  font-weight: 600;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.section-header th.grouped-header {
+  background-color: #7457A0;
+  border-bottom: 2px solid #5b3f86;
+  color: #fff;
+  padding: 6px 8px;
+}
+
+
+
+/* 3️⃣ Bottom Category Average Row */
+.category-average th {
+  background-color:#7457A0;
+  font-weight: 500;
+  border-bottom: 1px solid #5b3f86;
+  padding: 4px 6px;
+  text-align: center;
+}
+
+/* Category Average Row */
+.category-average th.avg-blank {
+  background-color: #ffffff;
+  border-bottom: 1px solid #ddd;
+}
+
+.category-average th.avg-start {
+  background-color: #7457A0;
+  font-weight: 600;
+  color: #4a148c;
+  text-align: left;
+  padding: 6px 8px;
+  border-bottom: 1px solid  #5b3f86;
+}
+
+.category-average th.avg-cell {
+  background-color: #6b4f9e;
+  font-weight: 500;
+  text-align: center;
+  padding: 6px 8px;
+  border-bottom: 1px solid  #5b3f86;
+}
+
+.category-average th.avg-start,
+.category-average th.avg-cell {
+  color: #ffffff !important;
+  font-weight: bold;
+}
+
+td[data-index="10"],
+th[data-index="10"] {
+  text-align: right;
+}
+
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+
+
+.fund-identity {
+  margin-top: 0rem;
+}
+
+.fund-identity h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.25rem;
+}
+
+.fund-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background-color: #007bff;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+.fund-metrics {
+  margin-top: 0.25rem;
+}
+
+.metrics-row {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.metric-block {
+  flex: 1;
+  min-width: 180px;
+}
+
+.metric-block label {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+.metric-value {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.layout-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* ✅ Outer wrapper to contain overflow */
+.table-wrapper {
+  width: 100%;
+  overflow-x: clip; /* hides horizontal scrollbars */
+}
+
+/* ✅ Inner scroll container with spacing */
+.table-scroll {
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-top: 1rem;
+}
+
+/* ✅ Filter styling preserved */
+.filter-group {
+  margin-bottom: 0rem;
+  display: inline-block;
+}
+
+/* ✅ Table remains expressive */
+#fundTable {
+  width: max-content;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+
+.analytics-controls {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+
+.fund-identity {
+  margin-top: 0;
+}
+
+label[for="categoryFilter"] {
+  display: inline-block;
+  background-color:#c5d8ff;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-bottom: 0.5rem;
+}
+
+label[for="categoryFilter"]:hover {
+  background-color: #e8e4f2; /* Misty Lavender */
+}
+
+label[for="fundFilter"] {
+  display: inline-block;
+  background-color: #c5d8ff;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-bottom: 0.5rem;
+}
+
+
+#fundFilter {
+  font-size: 14px;           /* Match categoryFilter */
+  font-family: 'Roboto', 'Segoe UI', sans-serif;
+  font-weight: 550;            /* Match categoryFilter */
+  /* padding: 0.5rem 0.5rem;      /* Match categoryFilter */
+  padding: 6px 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+  appearance: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.page-title {
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: #333;
+}
+
+.page-title .accent {
+  color: #007bff; /* Bootstrap blue or your brand tone */
+}
+
+.metric-value.change-positive {
+  color: green !important;
+}
+
+.metric-value.change-negative {
+  color: red !important;
+}
+
+.metric-value.change-neutral {
+  color: gray !important;
+}
+
+
+.chart-tab {
+  background-color: #d3d3d3;
+  border: 1px solid #ccc;
+  padding: 6px 16px;
+  font-size: 14px;
+  font-weight: 450;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+.chart-tab.active {
+  background-color: #009688;
+  color: white;
+}
+
+.chart-toggle {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 24px;
+  margin-bottom: 0.5rem;
+}
+
+
+
+.fund-tags-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5rem;
+  margin-top: 0.5rem;
+}
+
+
+.metric-inline {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 0.85rem;
+  min-width: 140px;
+}
+
+.metric-inline label {
+  color: #666;
+  margin-bottom: 0.25rem;
+}
+
+.metric-inline .metric-value {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+
+.fund-tags-row > .metric-inline:first-of-type {
+  margin-left: 2rem; /* or try 1.5rem for subtler spacing */
+}
+
+.fund-tags {
+  padding-right: 10rem;
+}
+
+#fundTable th {
+  text-align: left !important;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 0px;
+}
+
+
+.comparison-wrapper {
+  display: flex;
+  gap: 32px;
+  margin-top: 24px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+#table-container {
+  flex: 1 1 300px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  flex: 1 1 300px;
+}
+
+.metric-card {
+  position: relative;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 0.65rem 0.65rem;
+  text-align: center;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+  margin-top: 0rem;
+  overflow: hidden;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.metric-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,123,255,0.05), rgba(0,123,255,0.15));
+  opacity: 1;
+  z-index: 0;
+}
+
+.metric-card:hover {
+  background-color: #f0f8ff;
+  box-shadow: 0 6px 12px rgba(0,123,255,0.2);
+  transform: scale(1.05);
+}
+
+.metric-card .label,
+.metric-card .values,
+.metric-card .fund,
+.metric-card .category {
+  position: relative;
+  z-index: 1;
+}
+
+.metric-card .label {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.metric-card .values {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+.metric-card .fund {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.metric-card .category {
+  font-weight: bold;
+  color: #999;
+}
+
+strong {
+  font-weight: bold !important;
+}
+
+.metrics-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Roboto', 'Segoe UI', sans-serif;
+  table-layout: auto; /* Allow natural column widths */
+}
+
+.metrics-table th,
+.metrics-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid #eee;
+  color: #444;
+  vertical-align: middle;
+}
+
+.metrics-table th {
+  background-color: #5b3f86;
+  text-align: left;
+  font-weight: 600;
+  color: white;
+  border-bottom: 2px solid #ccc;
+  white-space: nowrap;
+}
+
+.metrics-table td:first-child {
+  white-space: normal;       /* Allow fund name to wrap */
+  word-break: break-word;    /* Break long names cleanly */
+  font-weight: 500;
+  color: #222;
+}
+
+.metrics-table td:not(:first-child),
+.metrics-table th:not(:first-child) {
+  text-align: center;
+  white-space: nowrap;
+}
+
+.peer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.peer-tabs {
+  display: flex;
+  gap: 6px;
+}
+
+.peer-tab {
+  background-color: #d3d3d3; /* Medium gray for clear contrast */
+  border: 1px solid #ccc;
+  padding: 6px 16px;
+  font-size: 14px;
+  font-weight: 450;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+.peer-tab.active {
+  background-color: #009688;
+  color: white;
+}
+
+.peer-comparison .category-average {
+  font-style: italic;
+  background-color: #f9f9f9;
+}
+
+.peer-comparison td.positive {
+  background-color: #d4f4d7; /* brighter green */
+}
+
+.peer-comparison td.negative {
+  background-color: #f8d4d4; /* brighter red */
+}
+
+.peer-comparison td.positive,
+.peer-comparison td.negative {
+  font-weight: 500;
+  border-radius: 4px;
+}
+
+.peer-comparison .selected-fund td,
+.peer-comparison .category-average td {
+  font-weight: bold !important;
+}
+
+
+.peer-comparison td {
+  font-weight: normal;
+}
+
+/* 🔷 About Page Layout */
+.about-layout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  padding: 0rem;
+  gap: 1rem; /* Added gap between left and right columns */
+  width: 100%;
+}
+
+/* 📊 Dashboard Card (Left Side) */
+.dashboard-card {
+  flex: 1 1 0;
+  background: linear-gradient(135deg, rgba(0,123,255,0.05), rgba(0,123,255,0.15));
+  padding: 0.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* 📍 Right Column (About Me + Feedback) */
+.about-right-column {
+  flex: 0 0 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Added gap between stacked cards */
+}
+
+/* 🔶 Shared Card Styling */
+.about-card {
+  background: linear-gradient(135deg, rgba(0,123,255,0.05), rgba(0,123,255,0.15));
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* 💬 Feedback Form Styling */
+.about-card form {
+  background: linear-gradient(135deg, rgba(0,123,255,0.05), rgba(0,123,255,0.15));
+  display: flex;
+  flex-direction: column;
+  gap: 0rem;
+  margin-top: 0rem;
+}
+
+.about-card input,
+.about-card textarea {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.about-card button {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.status-message {
+  margin-top: 0.5rem;
+  font-style: italic;
+  color: #555;
+}
+
+.hidden {
+  display: none;
+}
+
+.toggle-container {
+  margin: 1rem 0;
+}
+
+.toggle-container button.active {
+  background-color: #0077cc;
+  color: white;
+}
+
+.cross-tab-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cross-tab-table th,
+.cross-tab-table td {
+  border: 1px solid #ccc;
+  font-family: 'Roboto', 'Segoe UI', sans-serif;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+/* 🔸 Bold row labels */
+.cross-tab-table td:first-child {
+  font-weight: 600;
+  color: #333;
+  background-color: #f9f9f9;
+}
+
+/* 🔸 Bright group headers */
+.group-header[data-group="overview"] td {
+  background-color: #ffcc00;
+  color: #333;
+  font-weight: bold;
+}
+
+.group-header[data-group="returns"] td {
+  background-color: #00c2ff;
+  color: #fff;
+  font-weight: bold;
+}
+
+.group-header[data-group="ranks"] td {
+  background-color: #9b59b6;
+  color: #fff;
+  font-weight: bold;
+}
+
+.group-header[data-group="ratios"] td {
+  background-color: #ff6b6b;
+  color: #fff;
+  font-weight: bold;
+}
+
+/* 🌤️ Lighter record label cells */
+.group-row.overview td:first-child {
+  background-color: #fff2b3;
+}
+
+.group-row.returns td:first-child {
+  background-color: #b3eaff;
+}
+
+.group-row.ranks td:first-child {
+  background-color: #e8d9f0;
+}
+
+.group-row.ratios td:first-child {
+  background-color: #ffd6d6;
+}
+
+/* 🔒 Hidden rows */
+.group-row.hidden {
+  display: none;
+}
+
+/* 🎯 Center-align values for Returns, Ranks, Ratios */
+.group-row.returns td:not(:first-child),
+.group-row.ranks td:not(:first-child),
+.group-row.ratios td:not(:first-child) {
+  text-align: center;
+}
+
+/* 🖱️ Optional hover effect */
+.group-header:hover td {
+  filter: brightness(0.95);
+  cursor: pointer;
+}

@@ -1,0 +1,238 @@
+/* 🧩 Category Cards */
+.category-card {
+  background-color: #f9f9fc;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.category-card h3 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.category-card p {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+
+/* 📊 Metric Cards */
+.metric-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  transition: box-shadow 0.2s ease;
+}
+
+.metric-card:hover {
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.metric-card h4 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+  color: #222;
+}
+
+.metric-card p {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+
+/* 🧠 Analytics Layout */
+.analytics-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.analytics-section .metric-card {
+  height: 100%;
+}
+
+
+/* 🎯 Homepage Feature Cards */
+.features-section {
+  margin-top: 0rem;
+  text-align: center;
+  background-color: #fefefe;
+  border-radius: 12px;
+  padding: 1rem 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.features-section h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  padding: 0 1rem;
+}
+
+@media (max-width: 900px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.feature-step {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.feature-step::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,123,255,0.05), rgba(0,123,255,0.15));
+  opacity: 1;
+  z-index: 0;
+}
+
+.feature-step:hover {
+  background-color: #f0f8ff;
+  box-shadow: 0 12px 28px rgba(0,123,255,0.2);
+  transform: scale(1.10);
+}
+
+.feature-step h3,
+.feature-step p {
+  position: relative;
+  z-index: 1;
+}
+
+.feature-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #007bff;
+  transition: transform 0.3s ease;
+  transform-origin: center center;
+  display: block;
+  text-align: center;
+}
+
+.feature-step:hover .feature-icon {
+  transform: scale(1.8);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* same as 1fr 1fr */
+  margin-top: 0;
+  flex: 1 1 300px; /* only applies if inside a flex container */
+ 
+}
+
+.comparison-wrapper {
+  display: flex;
+  gap: 32px;
+  margin-top: 8px;
+  margin-bottom: 4px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+#table-container {
+  flex: 1 1 300px;
+}
+
+.metric-card {
+  position: relative;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 0.65rem 0.65rem;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+  margin-top: 0rem;
+  margin-bottom: 0.1rem;
+  overflow: hidden;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.metric-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,123,255,0.05), rgba(0,123,255,0.15));
+  opacity: 1;
+  z-index: 0;
+}
+
+.metric-card:hover {
+  background-color: #f0f8ff;
+  box-shadow: 0 6px 12px rgba(0,123,255,0.2);
+  transform: scale(1.05);
+}
+
+.metric-card .label,
+.metric-card .values,
+.metric-card .fund,
+.metric-card .category {
+  position: relative;
+  z-index: 1;
+}
+
+.metric-card .label {
+  font-size: 0.95rem;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.metric-card .values {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.metric-card .fund {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.metric-card .category {
+  font-weight: bold;
+  color: #999;
+}

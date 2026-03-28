@@ -1,0 +1,347 @@
+/* 🌐 Base Typography & Layout */
+:root {
+  --font-base: 'Roboto', 'Segoe UI', sans-serif;
+  --color-text: #444;
+  --color-heading: #333;
+  --color-accent: #007bff;
+  --color-bg: #f4f4f4;
+  --radius-md: 8px;
+  --shadow-light: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+body {
+  font-family: var(--font-base);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  margin: 0;
+  padding: 0;
+  letter-spacing: 0.2px;
+}
+
+h1, h2, h3 {
+  color: var(--color-heading);
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+h1 { font-size: 2.5rem; font-weight: 500; }
+h2 { font-size: 1.75rem; font-weight: 400; margin-top: 0; }
+h3 { font-size: 1.5rem; font-weight: 400; color: var(--color-accent); }
+
+p, .subtitle {
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--color-text);
+}
+
+strong {
+  font-weight: bold !important;
+}
+
+.accent {
+  color: var(--color-accent);
+  font-weight: 400;
+}
+
+/* 🧭 Navigation */
+
+.nav-container {
+  position: sticky;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.5rem 0.5rem 0rem 0.5rem; /* top, right, bottom, left */
+  gap: 12px;
+}
+
+.logo-left img {
+  height: 90px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* 🔷 Menu Bar */
+.menu-bar {
+  background-color: #605bec;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center; /* This centers the menu items */
+}
+
+/* 🔗 Menu Items */
+.menu {
+  list-style: none;
+  display: flex;
+  gap: 2.25rem;
+  margin: 0;
+  padding: 0;
+}
+
+.menu li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 12pt;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.menu li a:hover {
+  background-color: #4e48d4;
+}
+
+.menu li a.active {
+  background-color: #fff;
+  color: #453fec;
+}
+
+
+/* 📦 Layout Container */
+.layout-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* 🧩 Intro Section */
+.intro-section {
+  background-color: #f9f9fc;
+  padding: 2rem 1.5rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-light);
+  max-width: 800px;
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.intro-section h2 {
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin: 0.25rem 0;
+  color: var(--color-heading);
+}
+
+.intro-section p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #555;
+}
+
+.star {
+  font-size: 1.2em;
+  margin-right: 2px;
+}
+
+.star.filled {
+  color: gold;
+}
+
+.star.empty {
+  color: #ccc;
+}
+
+/* 🔽 Filter Controls */
+.analytics-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* 🎛️ Unified Filter/Fund Group Styling */
+.filter-group,
+.fund-group {
+  font-size: 13.5px;
+  font-family: 'Roboto', 'Segoe UI', sans-serif;
+  font-weight: 550;
+  padding: 5px 0;
+  border-radius: 4px;
+  border: none;
+  background-color: #f9f9f9;
+  color: #333;
+  appearance: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  margin-top: 0rem;
+  margin-bottom: 0rem;
+}
+
+.filter-group label,
+.fund-group label {
+  display: inline-block;
+  max-width: max-content;
+  background-color: #c5d8ff;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-bottom: 0.25rem;
+}
+
+.filter-group select,
+.fund-group select {
+  padding: 5px 15px;
+  font-family: 'Roboto', 'Segoe UI', sans-serif;
+  font-size: 13.5px;
+  font-weight: 550;
+  color: #333;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  appearance: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+/* 📈 Chart/Table Toggle */
+.chart-toggle {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 24px;
+  margin-bottom: 0.25rem;
+}
+
+.chart-tab {
+  background-color: #d3d3d3;
+  border: 1px solid #ccc;
+  padding: 6px 16px;
+  font-size: 14px;
+  font-weight: 450;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+.chart-tab.active {
+  background-color: #009688;
+  color: white;
+}
+
+/* 📊 Chart Container */
+#chart-container {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* 🌍 Layout Container */
+.dual-indices-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+/* 📈 Market Table Containers */
+.market-table {
+  flex: 1 1 30%;
+  min-width: 240px;
+  max-width: 320px;
+  background-color: #fefefe;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 4px;
+  transition: box-shadow 0.3s ease;
+}
+
+.market-table:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* 🔷 Site Header Block */
+.site-header.center-header {
+  flex: 1 1 40%;
+  min-width: 300px;
+  max-width: 380px;
+  text-align: center;
+}
+
+/* 🧠 Section Title */
+.section-subtitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 0;
+  color: #333;
+}
+
+/* 📊 Table Wrapper */
+.fund-slice-table {
+  background-color: rgba(0, 123, 255, 0.2);
+  border-radius: 8px;
+  padding: 8px;
+  overflow-x: auto;
+}
+
+/* 📋 Table Styling */
+.fund-slice-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Roboto', 'Segoe UI', sans-serif;
+  font-size: 12.5px;
+  background-color: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* 🧾 Table Header */
+.fund-slice-table th {
+  text-align: left;
+  padding: 6px 12px;
+  font-weight: 600;
+  background-color: #e0e4f8;
+  color: #333;
+  border: 1px solid #ccc;
+}
+
+/* 🧾 First Column Header: No Wrap, Stronger Contrast */
+.fund-slice-table th:first-child {
+  white-space: nowrap;
+  font-weight: 600;
+  color: #222;
+}
+
+/* 📄 Table Cells */
+.fund-slice-table td {
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  color: #444;
+}
+
+/* 🧾 First Column Cell: Left-aligned, No Wrap */
+.fund-slice-table td:first-child {
+  text-align: left;
+  white-space: nowrap;
+  font-weight: 500;
+  color: #222;
+  padding-left: 12px;
+}
+
+/* 🔢 Remaining Columns: Right-aligned */
+.fund-slice-table td:not(:first-child) {
+  text-align: right;
+  padding-right: 12px;
+}
+
+/* 📱 Responsive Stacking */
+@media (max-width: 768px) {
+  .dual-indices-layout {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .site-header.center-header {
+    text-align: left;
+  }
+}

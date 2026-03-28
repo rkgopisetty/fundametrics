@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fund(a)Metrics Analytics</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/cards.css">
+  <link rel="stylesheet" href="css/table.css">
+  <link rel="stylesheet" href="css/analytics.css">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <header class="nav-container">
+    <div class="logo-left">
+      <img src="fm_logo2.png" alt="Fund(a)Metrics Logo">
+    </div>
+    <nav class="menu-bar">
+      <ul class="menu">
+          <li><a href="index.html">🏠 Home</a></li>
+          <li><a href="metrics.html">📊 Fund Metrics</a></li>
+          <li><a href="top.html">🥇 Top Funds</a></li>
+          <li><a href="analytics.html" class="active">📈 Analytics</a></li>
+          <li><a href="vault.html">🏦 Fund Vault</a></li>
+          <li><a href="about.html">ℹ️ About</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="layout-container">
+    <!-- 📊 Page Title -->
+    <h2 class="analytics-title">Fund Comparison Analytics</h2>
+
+    <!-- 🔍 Category Filter -->
+    <section class="analytics-controls">
+      <div class="filter-group">
+        <label for="categoryFilter">Category:</label>
+        <select id="categoryFilter">
+          <option value="">-- Choose a Category --</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- 🧩 Fund Selectors -->
+    <section class="fund-selectors">
+      <div class="fund-group">
+        <label for="fund1-select">Fund 1:</label>
+        <select id="fund1-select" disabled></select>
+      </div>
+      <div class="fund-group">
+        <label for="fund2-select">Fund 2:</label>
+        <select id="fund2-select" disabled></select>
+      </div>
+      <div class="fund-group">
+        <label for="fund3-select">Fund 3 (optional):</label>
+        <select id="fund3-select" disabled></select>
+      </div>
+    </section>
+
+    <!-- 🚀 Compare Button -->
+    <section class="submit-section">
+      <button id="submit-funds" disabled>Compare</button>
+    </section>
+
+    <!-- 🔄 Chart/Table Toggle -->
+    <section class="chart-toggle" id="view-toggle" style="display: none;">
+      <button id="chartToggle" class="chart-tab active">📈 Chart</button>
+      <button id="tableToggle" class="chart-tab">📊 Table</button>
+    </section>
+
+    <!-- 📈 Chart Canvas -->
+    <section class="chart-section" id="chart-section">
+      <canvas id="fund-comparison-chart" width="800" height="400"></canvas>
+    </section>
+
+    <!-- 📊 Comparison Table -->
+    <section id="fund-cross-tab" style="display: none;">
+      <table class="cross-tab-table">
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th id="fund1-header">Fund 1</th>
+            <th id="fund2-header">Fund 2</th>
+            <th id="fund3-header">Fund 3</th>
+            <th>Cat. Average</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <!-- 🟡 Overview Group -->
+          <tr class="group-header" data-group="overview"><td colspan="5">▼ Overview</td></tr>
+          <tr class="group-row overview hidden"><td>Category</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+          <tr class="group-row overview hidden"><td>Crisil</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+          <tr class="group-row overview hidden"><td>AUM</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+
+          <!-- 🔵 Returns Group -->
+          <tr class="group-header" data-group="returns"><td colspan="5">▶ Returns</td></tr>
+          <tr class="group-row returns hidden"><td>1W Returns</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+          <tr class="group-row returns hidden"><td>1M Returns</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+          <tr class="group-row returns hidden"><td>3M Returns</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+          <tr class="group-row returns hidden"><td>6M Returns</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+          <tr class="group-row returns hidden"><td>YTD Returns</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+          <tr class="group-row returns hidden"><td>1Y Returns</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+          <tr class="group-row returns hidden"><td>2Y Returns</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+          <tr class="group-row returns hidden"><td>3Y Returns</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+          <tr class="group-row returns hidden"><td>5Y Returns</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+          <tr class="group-row returns hidden"><td>10Y Returns</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+
+          <!-- 🟣 Ranks Group -->
+          <tr class="group-header" data-group="ranks"><td colspan="5">▶ Ranks</td></tr>
+          <tr class="group-row ranks hidden"><td>1W Rank</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+          <tr class="group-row ranks hidden"><td>1M Rank</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+          <tr class="group-row ranks hidden"><td>3M Rank</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+          <tr class="group-row ranks hidden"><td>6M Rank</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+          <tr class="group-row ranks hidden"><td>YTD Rank</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+          <tr class="group-row ranks hidden"><td>1Y Rank</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+          <tr class="group-row ranks hidden"><td>2Y Rank</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+          <tr class="group-row ranks hidden"><td>3Y Rank</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+          <tr class="group-row ranks hidden"><td>5Y Rank</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+          <tr class="group-row ranks hidden"><td>10Y Rank</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+
+          <!-- 🔴 Ratios Group -->
+          <tr class="group-header" data-group="ratios"><td colspan="5">▶ Ratios</td></tr>
+          <tr class="group-row ratios hidden"><td>Std. Dev</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+          <tr class="group-row ratios hidden"><td>Beta</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+          <tr class="group-row ratios hidden"><td>Sharpe</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+          <tr class="group-row ratios hidden"><td>Alpha</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+          <tr class="group-row ratios hidden"><td>Treynor's Ratio</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 🧠 Active Page Highlight Script -->
+    <script>
+      const currentPage = window.location.pathname.split("/").pop();
+      document.querySelectorAll(".menu a").forEach(link => {
+        link.classList.toggle("active", link.getAttribute("href") === currentPage);
+      });
+    </script>
+
+    <!-- 📦 External Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="global.js"></script>
+    <script src="analytics.js"></script>
+
+  </div>
+</body>
+</html>

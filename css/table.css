@@ -1,0 +1,240 @@
+/* 📊 Fund Table Styling */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.table-scroll {
+  width: 100%;
+  padding: 0 1rem;
+  margin-top: 1rem;
+}
+
+#fundTable {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+  background-color: #fff;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+}
+
+#fundTable th,
+#fundTable td {
+  font-size: 10pt;
+  padding: 10px 14px;
+  white-space: nowrap;
+  border-bottom: 1px solid #eee;
+  color: #444;
+  vertical-align: middle;
+}
+
+#fundTable th {
+  font-weight: 600;
+  background-color: #5b3f86;
+  color: white;
+  cursor: pointer;
+  position: relative;
+}
+
+#fundTable th.sorted-asc::after { content: " ↑"; }
+#fundTable th.sorted-desc::after { content: " ↓"; }
+
+#fundTable th:first-child,
+#fundTable td:first-child {
+  text-align: left;
+  font-weight: 500;
+  color: #222;
+}
+
+#fundTable tbody tr.odd-row { background-color: #cad7f2; }
+#fundTable tbody tr.even-row { background-color: #d8dfeb; }
+#fundTable tbody tr:hover { background-color: #dbeeff; }
+
+/* 🧩 Category Averages */
+.category-average th {
+  background-color: #452c63;
+  color: white;
+  font-weight: bold;
+  padding: 6px 8px;
+}
+
+.category-average th.avg-start,
+.category-average th.avg-cell {
+  background-color: #6b4f9e;
+  color: #fff !important;
+  font-weight: bold;
+  text-align: center;
+  padding: 6px 8px;
+}
+
+.category-average th.avg-blank {
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+/* 🧠 Grouped Headers */
+.section-header th.grouped-header {
+  background-color: #7457A0;
+  color: white;
+  padding: 6px 8px;
+  text-align: center;
+}
+
+.section-header th.blank-header {
+  background-color: #fff;
+  border-bottom: 2px solid #ddd;
+}
+
+/* 📋 Metrics Table */
+.metrics-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Roboto', 'Segoe UI', sans-serif;
+  table-layout: auto;
+  margin-top: 0rem;
+}
+
+.metrics-table th,
+.metrics-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid #eee;
+  color: #444;
+  vertical-align: middle;
+}
+
+.metrics-table th {
+  background-color: #5b3f86;
+  text-align: left;
+  font-weight: 600;
+  color: white;
+  border-bottom: 2px solid #ccc;
+  white-space: nowrap;
+}
+
+.metrics-table td:first-child {
+  white-space: normal;
+  word-break: break-word;
+  font-weight: 500;
+  color: #222;
+}
+
+.metrics-table td:not(:first-child),
+.metrics-table th:not(:first-child) {
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* 🏆 Top Funds Table Styling */
+table[id$="-table-wrapper"] {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  font-family: var(--font-base);
+  table-layout: auto;
+}
+
+table[id$="-table-wrapper"] th,
+table[id$="-table-wrapper"] td {
+  padding: 9px 13px;
+  font-size: 0.9rem;
+  color: #444;
+  border-bottom: 1px solid #eee;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+table[id$="-table-wrapper"] th {
+  background-color: #5b3f86;
+  color: white;
+  font-weight: 600;
+  text-align: left;
+  position: relative;
+}
+
+table[id$="-table-wrapper"] th.sorted-asc::after {
+  content: " ↑";
+}
+
+table[id$="-table-wrapper"] th.sorted-desc::after {
+  content: " ↓";
+}
+
+/* 🔷 Full-row striping for metrics and wrapper tables */
+.metrics-table tbody tr:nth-child(odd),
+table[id$="-table-wrapper"] tbody tr:nth-child(odd) {
+  background-color: #cad7f2 !important;
+}
+
+.metrics-table tbody tr:nth-child(even),
+table[id$="-table-wrapper"] tbody tr:nth-child(even) {
+  background-color: #d8dfeb !important;
+}
+
+/* 🚫 Neutralize row background in peer-comparison to prevent bleed-through */
+.peer-comparison tbody tr:nth-child(odd),
+.peer-comparison tbody tr:nth-child(even) {
+  background-color: transparent !important;
+}
+
+/* ✅ First-column-only striping for peer-comparison */
+.peer-comparison tbody tr:nth-child(odd) td:first-child {
+  background-color: #cad7f2;
+  font-weight: 500;
+}
+
+.peer-comparison tbody tr:nth-child(even) td:first-child {
+  background-color: #d8dfeb;
+  font-weight: 500;
+}
+
+
+
+table[id$="-table-wrapper"] tbody tr:hover,
+ .metrics-table tbody tr:hover{
+  background-color: #dbeeff;
+}
+
+/* Right-align numeric columns */
+table[id$="-table-wrapper"] td:last-child,
+table[id$="-table-wrapper"] td:nth-last-child(2),
+table[id$="-table-wrapper"] th:last-child,
+table[id$="-table-wrapper"] th:nth-last-child(2) {
+  text-align: right;
+}
+
+.vault-container {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  overflow-x: hidden;
+}
+
+/* Ensure inner wrappers respect container padding */
+.vault-container .table-wrapper,
+.vault-container .table-scroll {
+  width: 100%;
+  box-sizing: border-box; /* 👈 This is key */
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Table should not overflow */
+.vault-container table#fundTable {
+  width: 100%;
+  table-layout: auto;
+  border-collapse: collapse;
+  box-sizing: border-box; /* 👈 Ensures it respects parent padding */
+}
+
+/* 🧩 Vault Table Headers */
+.vault-container table#fundTable th {
+  background-color: #5b3f86;
+  color: white !important;
+  font-weight: 600;
+  text-align: left;
+}
+

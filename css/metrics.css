@@ -1,0 +1,236 @@
+/* 📊 Page Title */
+.page-title {
+  font-size: 1.75rem;
+  font-weight: 400;
+  margin-bottom: 0.25rem;
+  color: var(--color-heading);
+}
+
+.page-intro {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+  max-width: 800px;
+}
+
+
+/* 🏷️ Fund Identity */
+.fund-identity {
+  text-align: left;
+  margin: 0 0 0 0;
+}
+
+.fund-identity h3 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  text-align: left;
+  padding-left: 0rem;
+  margin-bottom: 0rem;
+  color: #007bff;
+}
+
+
+/* 🏷️ Fund Tags */
+.fund-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0rem;
+}
+
+.tag {
+  background-color: #007bff;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.fund-tags-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-left: 0rem;
+  gap: 10rem;
+  margin-top: 0rem;
+}
+
+.metric-inline {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 0.85rem;
+  min-width: 160px;
+}
+
+.metric-inline label {
+  color: #666;
+  margin-bottom: 0.25rem;
+}
+
+.metric-inline .metric-value {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.fund-tags-row > .metric-inline:first-of-type {
+  margin-left: 2rem;
+}
+
+
+/* 📈 Fund Metrics */
+.fund-metrics {
+  margin-top: 0.25rem;
+}
+
+.metrics-row {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.metric-block {
+  flex: 1;
+  min-width: 180px;
+}
+
+.metric-block label {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+.metric-value {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.metric-value.change-positive {
+  color: green !important;
+}
+
+.metric-value.change-negative {
+  color: red !important;
+}
+
+.metric-value.change-neutral {
+  color: gray !important;
+}
+
+
+/* 🧩 Comparison Table + Cards */
+.comparison-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+
+/* 🧠 Peer Comparison Tabs */
+.peer-comparison {
+  margin-top: 0.25rem;
+}
+
+.peer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0rem;
+}
+
+.section-label {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #007bff;
+  padding-left: 0rem;
+  margin-bottom: 0.5rem;
+}
+
+.peer-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 0rem;
+}
+
+.peer-tab {
+  background-color: #d3d3d3;
+  border: 1px solid #ccc;
+  padding: 6px 16px;
+  font-size: 14px;
+  font-weight: 450;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #333;
+  transition: background-color 0.2s ease;
+  margin-bottom: 0rem;
+}
+
+.peer-tab:hover {
+  background-color: #e0f0ff;
+}
+
+.peer-tab.active {
+  background-color: #009688;
+  color: white;
+}
+
+.peer-content {
+  margin-top: 0rem;
+}
+
+.peer-comparison .category-average {
+  font-style: italic;
+  background-color: #f9f9f9;
+}
+
+.peer-comparison td span.positive {
+  background-color: #ccebd2;
+  color: #14532d;
+  font-weight: 450;
+  border-radius: 4px;
+  padding: 2px 4px;
+}
+
+.peer-comparison td span.negative {
+  background-color: #f8d7da;
+  color: #842029;
+  font-weight: 450;
+  border-radius: 4px;
+  padding: 2px 4px;
+}
+
+
+.peer-comparison .selected-fund td,
+.peer-comparison .category-average td {
+  font-weight: bold !important;
+}
+
+
+.peer-comparison td {
+  font-weight: normal;
+}
+
+.peer-comparison .nowrap-cell {
+  display: block;
+  max-width: 500px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
+
+

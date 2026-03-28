@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Top Funds</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/cards.css">
+  <link rel="stylesheet" href="css/table.css">
+  <link rel="stylesheet" href="css/top.css">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <header class="nav-container">
+    <div class="logo-left">
+      <img src="fm_logo2.png" alt="Fund(a)Metrics Logo">
+    </div>
+    <nav class="menu-bar">
+      <ul class="menu">
+        <li><a href="index.html">🏠 Home</a></li>
+        <li><a href="metrics.html">📊 Fund Metrics</a></li>
+        <li><a href="top.html" class="active">🥇 Top Funds</a></li>
+        <li><a href="analytics.html">📈 Analytics</a></li>
+        <li><a href="vault.html">🏦 Fund Vault</a></li>
+        <li><a href="about.html">ℹ️ About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="layout-container">
+    <!-- 📊 Page Title -->
+
+    <h2>Top Performing Mutual Funds</h2>
+
+    <!-- 🧭 Category Selector -->
+    <section class="top-fund-categories">
+      <div class="category-boxes">
+        <a href="#" class="category-card" data-category="LargeCap">
+          <div class="fund-icon">🏛️</div>
+          <h3>LargeCap</h3>
+        </a>
+        <a href="#" class="category-card" data-category="MultiCap">
+          <div class="fund-icon">📊</div>
+          <h3>MultiCap</h3>
+        </a>
+        <a href="#" class="category-card" data-category="Contra">
+          <div class="fund-icon">🧭</div>
+          <h3>Contra</h3>
+        </a>
+        <a href="#" class="category-card" data-category="FlexiCap">
+          <div class="fund-icon">🔀</div>
+          <h3>FlexiCap</h3>
+        </a>
+        <a href="#" class="category-card" data-category="MidCap">
+          <div class="fund-icon">🏙️</div>
+          <h3>MidCap</h3>
+        </a>
+        <a href="#" class="category-card" data-category="SmallCap">
+          <div class="fund-icon">🚀</div>
+          <h3>SmallCap</h3>
+        </a>
+      </div>
+      <div id="categoryDescription" class="category-description-box hidden"></div>
+    </section>
+
+    <!-- 🏷️ Dynamic Heading -->
+    <div id="heading-container">
+      <h2 id="heading"></h2>
+    </div>
+
+    <!-- 📋 Fund Tables -->
+    <section class="top-fund-tables">
+      <div class="fund-table-group">
+
+        <!-- 🔥 Default Top Funds -->
+        <div class="fund-table" id="TopDefault-section">
+          <h3 class="fund-section-heading" id="TopDefault-heading">Top Mutual Funds Across All Categories</h3>
+
+          <!-- ⏱️ Time Range Toggle -->
+          <div class="time-range-selector" id="TopDefault-ranges">
+            <button data-range="1W">1W</button>
+            <button data-range="1M">1M</button>
+            <button data-range="3M">3M</button>
+            <button data-range="6M">6M</button>
+            <button data-range="YTD">YTD</button>
+            <button data-range="1Y" class="active">1Y</button>
+            <button data-range="2Y">2Y</button>
+            <button data-range="3Y">3Y</button>
+            <button data-range="5Y">5Y</button>
+            <button data-range="10Y">10Y</button>
+          </div>
+
+          <div class="table-wrapper">
+            <table id="TopDefault-table-wrapper">
+              <thead id="TopDefault-thead"></thead>
+              <tbody id="TopDefault-table"></tbody>
+            </table>
+          </div>
+        </div>
+
+
+        <!-- 🧩 Category-Specific Tables -->
+        <!-- Each section follows the same structure: heading, time-range buttons, table -->
+
+        <!-- FlexiCap -->
+        <div class="fund-table hidden" id="FlexiCap-section">
+          <h3 class="fund-section-heading" id="FlexiCap-heading"></h3>
+          <div class="time-range-selector" id="FlexiCap-ranges">
+            <button data-range="1W">1W</button><button data-range="1M">1M</button><button data-range="3M">3M</button>
+            <button data-range="6M">6M</button><button data-range="YTD">YTD</button><button data-range="1Y"
+              class="active">1Y</button>
+            <button data-range="2Y">2Y</button><button data-range="3Y">3Y</button><button
+              data-range="5Y">5Y</button><button data-range="10Y">10Y</button>
+          </div>
+          <div class="table-wrapper">
+            <table id="FlexiCap-table-wrapper">
+              <thead id="FlexiCap-thead"></thead>
+              <tbody id="FlexiCap-table"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- MidCap -->
+        <div class="fund-table hidden" id="MidCap-section">
+          <h3 class="fund-section-heading" id="MidCap-heading"></h3>
+          <div class="time-range-selector" id="MidCap-ranges">
+            <button data-range="1W">1W</button><button data-range="1M">1M</button><button data-range="3M">3M</button>
+            <button data-range="6M">6M</button><button data-range="YTD">YTD</button><button data-range="1Y"
+              class="active">1Y</button>
+            <button data-range="2Y">2Y</button><button data-range="3Y">3Y</button><button
+              data-range="5Y">5Y</button><button data-range="10Y">10Y</button>
+          </div>
+          <div class="table-wrapper">
+            <table id="MidCap-table-wrapper">
+              <thead id="MidCap-thead"></thead>
+              <tbody id="MidCap-table"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- SmallCap -->
+        <div class="fund-table hidden" id="SmallCap-section">
+          <h3 class="fund-section-heading" id="SmallCap-heading"></h3>
+          <div class="time-range-selector" id="SmallCap-ranges">
+            <button data-range="1W">1W</button><button data-range="1M">1M</button><button data-range="3M">3M</button>
+            <button data-range="6M">6M</button><button data-range="YTD">YTD</button><button data-range="1Y"
+              class="active">1Y</button>
+            <button data-range="2Y">2Y</button><button data-range="3Y">3Y</button><button
+              data-range="5Y">5Y</button><button data-range="10Y">10Y</button>
+          </div>
+          <div class="table-wrapper">
+            <table id="SmallCap-table-wrapper">
+              <thead id="SmallCap-thead"></thead>
+              <tbody id="SmallCap-table"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Contra -->
+        <div class="fund-table hidden" id="Contra-section">
+          <h3 class="fund-section-heading" id="Contra-heading"></h3>
+          <div class="time-range-selector" id="Contra-ranges">
+            <button data-range="1W">1W</button><button data-range="1M">1M</button><button data-range="3M">3M</button>
+            <button data-range="6M">6M</button><button data-range="YTD">YTD</button><button data-range="1Y"
+              class="active">1Y</button>
+            <button data-range="2Y">2Y</button><button data-range="3Y">3Y</button><button
+              data-range="5Y">5Y</button><button data-range="10Y">10Y</button>
+          </div>
+          <div class="table-wrapper">
+            <table id="Contra-table-wrapper">
+              <thead id="Contra-thead"></thead>
+              <tbody id="Contra-table"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- MultiCap -->
+        <div class="fund-table hidden" id="MultiCap-section">
+          <h3 class="fund-section-heading" id="MultiCap-heading"></h3>
+          <div class="time-range-selector" id="MultiCap-ranges">
+            <button data-range="1W">1W</button>
+            <button data-range="1M">1M</button>
+            <button data-range="3M">3M</button>
+            <button data-range="6M">6M</button>
+            <button data-range="YTD">YTD</button>
+            <button data-range="1Y" class="active">1Y</button>
+            <button data-range="2Y">2Y</button>
+            <button data-range="3Y">3Y</button>
+            <button data-range="5Y">5Y</button>
+            <button data-range="10Y">10Y</button>
+          </div>
+          <div class="table-wrapper">
+            <table id="MultiCap-table-wrapper">
+              <thead id="MultiCap-thead"></thead>
+              <tbody id="MultiCap-table"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- LargeCap -->
+        <div class="fund-table hidden" id="LargeCap-section">
+          <h3 class="fund-section-heading" id="LargeCap-heading"></h3>
+          <div class="time-range-selector" id="LargeCap-ranges">
+            <button data-range="1W">1W</button>
+            <button data-range="1M">1M</button>
+            <button data-range="3M">3M</button>
+            <button data-range="6M">6M</button>
+            <button data-range="YTD">YTD</button>
+            <button data-range="1Y" class="active">1Y</button>
+            <button data-range="2Y">2Y</button>
+            <button data-range="3Y">3Y</button>
+            <button data-range="5Y">5Y</button>
+            <button data-range="10Y">10Y</button>
+          </div>
+          <div class="table-wrapper">
+            <table id="LargeCap-table-wrapper">
+              <thead id="LargeCap-thead"></thead>
+              <tbody id="LargeCap-table"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 🧠 Active Page Highlight Script -->
+    <script>
+      const currentPage = window.location.pathname.split("/").pop();
+      document.querySelectorAll(".menu a").forEach(link => {
+        link.classList.toggle("active", link.getAttribute("href") === currentPage);
+      });
+    </script>
+
+    <!-- 📦 External Scripts -->
+    <script src="global.js"></script>
+    <script src="top.js"></script>
+    </div>
+</body>
+
+</html>

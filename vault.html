@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Explore Funds</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/table.css">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <header class="nav-container">
+    <div class="logo-left">
+      <img src="fm_logo2.png" alt="Fund(a)Metrics Logo">
+    </div>
+    <nav class="menu-bar">
+      <ul class="menu">
+          <li><a href="index.html">🏠 Home</a></li>
+          <li><a href="metrics.html">📊 Fund Metrics</a></li>
+          <li><a href="top.html">🥇 Top Funds</a></li>
+          <li><a href="analytics.html">📈 Analytics</a></li>
+          <li><a href="vault.html" class="active">🏦 Fund Vault</a></li>
+          <li><a href="about.html">ℹ️ About</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="vault-container">
+    <!-- 📊 Page Title -->
+    <h2>Curated Vault of India’s Mutual Funds</h2>
+  </div>
+
+  <!-- 📋 Table Section (full-width) -->
+  <div class="table-wrapper">
+    <div class="table-scroll">
+      <!-- 🔍 Category Filter -->
+      <div class="filter-group">
+        <label for="categoryFilter">Category:</label>
+        <select id="categoryFilter">
+          <option value="">All Categories</option>
+        </select>
+      </div>
+
+      <!-- 📊 Vault Table -->
+      <table id="fundTable">
+        <thead>
+          <tr id="columnHeaderRow"></tr>
+          <tr class="section-header">
+            <th colspan="5"></th>
+            <th colspan="10">Returns</th>
+            <th colspan="10">Ranks</th>
+            <th colspan="5">Ratios</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 📦 External Scripts -->
+  <script src="global.js"></script>
+  <script src="vault.js"></script>
+
+  <!-- 🧠 Active Page Highlight -->
+  <script>
+    const currentPage = window.location.pathname.split("/").pop();
+    document.querySelectorAll(".menu a").forEach(link => {
+      link.classList.toggle("active", link.getAttribute("href") === currentPage);
+    });
+  </script>
+</body>
+</html>

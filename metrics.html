@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fund Metrics</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/cards.css">
+  <link rel="stylesheet" href="css/metrics.css">
+  <link rel="stylesheet" href="css/table.css">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <header class="nav-container">
+    <div class="logo-left">
+      <img src="fm_logo2.png" alt="Fund(a)Metrics Logo">
+    </div>
+    <nav class="menu-bar">
+      <ul class="menu">
+          <li><a href="index.html">🏠 Home</a></li>
+          <li><a href="metrics.html" class="active">📊 Fund Metrics</a></li>
+          <li><a href="top.html">🥇 Top Funds</a></li>
+          <li><a href="analytics.html">📈 Analytics</a></li>
+          <li><a href="vault.html">🏦 Fund Vault</a></li>
+          <li><a href="about.html">ℹ️ About</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="layout-container">
+    <!-- 📊 Page Title -->
+    <div class="page-container">
+      <h2 class="page-title">Fund<span class="accent">(a)</span>Mentals: Performance Insights</h2>
+
+      <!-- 🔽 Category & Fund Selectors -->
+      <div class="analytics-controls" id="selectors">
+        <div class="filter-group">
+          <label for="categoryFilter">Category:</label>
+          <select id="categoryFilter">
+            <option value="">Select Category</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="fundFilter">Fund:</label>
+          <select id="fundFilter" disabled>
+            <option value="">-- Choose a Fund --</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- 📈 Metrics Container -->
+      <div class="metrics-container">
+        <section id="fundIdentity" class="fund-identity" style="display: none;"></section>
+        <section id="fundMetrics" class="fund-metrics"></section>
+
+        <!-- 🔀 Chart/Table Toggle -->
+        <div id="view-section" style="display: none;">
+          <div class="toggle-buttons chart-toggle">
+            <button id="toggle-chart" class="chart-tab active">📈 Chart</button>
+            <button id="toggle-table" class="chart-tab">📊 Table</button>
+          </div>
+
+          <!-- 📊 Chart Canvas -->
+          <div id="chart-container">
+            <canvas id="fundVsCategoryChart" width="600" height="300"></canvas>
+          </div>
+
+          <!-- 🧩 Comparison Table + Cards -->
+          <div id="comparison-wrapper" class="comparison-wrapper" style="display: none;">
+            <div id="table-container">
+              <table class="metrics-table">
+                <thead>
+                  <tr>
+                    <th>Time Period</th>
+                    <th>This Fund</th>
+                    <th>Category Average</th>
+                  </tr>
+                </thead>
+                <tbody id="metrics-table-body"></tbody>
+              </table>
+            </div>
+
+            <div id="card-container" class="card-grid">
+              <!-- Cards will be injected here -->
+            </div>
+          </div>
+
+          <!-- 🧠 Peer Comparison Section -->
+          <div id="peer-comparison" class="peer-comparison" style="display: none;">
+            <div class="peer-header">
+              <h3 class="section-label">Peer Comparison</h3>
+              <div class="peer-tabs">
+                <button class="peer-tab active" data-tab="returns">Returns</button>
+                <button class="peer-tab" data-tab="ranks">Ranks</button>
+                <button class="peer-tab" data-tab="ratios">Ratios</button>
+              </div>
+            </div>
+
+            <div class="peer-content" id="peer-returns"></div>
+            <div class="peer-content" id="peer-ranks" style="display: none;"></div>
+            <div class="peer-content" id="peer-ratios" style="display: none;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 📦 Scripts -->
+      <script src="global.js"></script>
+      <script src="metrics.js"></script>
+
+      <!-- 🧠 Active Page Highlight -->
+      <script>
+        const currentPage = window.location.pathname.split("/").pop();
+        document.querySelectorAll(".menu a").forEach(link => {
+          link.classList.toggle("active", link.getAttribute("href") === currentPage);
+        });
+      </script>
+    </div>
+  </div>
+</body>
+</html>

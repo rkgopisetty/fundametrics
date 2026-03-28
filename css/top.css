@@ -1,0 +1,156 @@
+/* 🗂 Category Cards */
+.top-fund-categories {
+  text-align: center;
+  padding: 1rem 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0;
+}
+
+.top-fund-tables {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.category-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.category-card {
+  flex: 0 0 160px;
+  height: 110px;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #333;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.category-card h3 {
+  text-decoration: none;
+}
+
+.category-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,123,255,0.05), rgba(0,123,255,0.15));
+  z-index: 0;
+  border-radius: 12px;
+}
+
+.category-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.category-card .fund-icon {
+  font-size: 36px;
+  transition: transform 0.3s ease;
+}
+
+.category-card:hover {
+  transform: scale(1.10);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.category-card:hover .fund-icon {
+  transform: scale(1.2);
+}
+
+/* 🟢 Description Box */
+.category-description-box {
+  color: #228B22;
+  background: none;
+  border: none;
+  margin: 16px 0;
+  padding: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  box-shadow: none;
+  transition: opacity 0.4s ease;
+  opacity: 0;
+}
+
+.category-description-box.show {
+  opacity: 1;
+}
+
+/* ⏱ Time Range Selector */
+.time-range-selector {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.time-range-selector button {
+  padding: 6px 16px;
+  border: 1px solid #ccc;
+  background-color: #d3d3d3;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 450;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+.time-range-selector button.active {
+  background-color: #009688;
+  color: white;
+  border-color: #009688;
+}
+
+/* 🏷 Table Heading */
+.table-heading {
+  margin-bottom: 12px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+/* 🔒 Utility */
+.hidden {
+  display: none;
+}
+
+.medal-badge {
+  display: inline-block;
+  min-width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  margin-right: 6px;
+  font-size: 0.9rem;
+  background-color: #5b3f86;
+}
+
+.rank-1 { background-color: gold; }
+.rank-2 { background-color: silver; }
+.rank-3 { background-color: #cd7f32; } /* bronze */
+
+.highlight-range {
+  background-color: #c5d8ff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 500;
+  color: #2a3b8f;
+}
+

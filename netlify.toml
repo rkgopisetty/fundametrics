@@ -1,0 +1,5 @@
+[functions]
+  node_bundler = "esbuild"
+  external_node_modules = []
+  included_files = ["netlify/functions/**"]
+  node_version = "18"

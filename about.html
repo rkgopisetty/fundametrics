@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>About | Fund(a)Metrics</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <header class="nav-container">
+    <div class="logo-left">
+      <img src="fm_logo2.png" alt="Fund(a)Metrics Logo">
+    </div>
+    <nav class="menu-bar">
+      <ul class="menu">
+          <li><a href="index.html">🏠 Home</a></li>
+          <li><a href="metrics.html">📊 Fund Metrics</a></li>
+          <li><a href="top.html">🥇 Top Funds</a></li>
+          <li><a href="analytics.html">📈 Analytics</a></li>
+          <li><a href="vault.html">🏦 Fund Vault</a></li>
+          <li><a href="about.html" class="active">ℹ️ About</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- 🔷 Main Content Layout -->
+    <main class="about-layout">
+
+      <!-- 📊 Left Column: Dashboard Overview -->
+      <section class="about-card dashboard-card">
+        <h3>About This Dashboard</h3>
+        <p class="tagline">Clarity. Context. Control. Fund(a)Metrics turns raw data into confident decisions.</p>
+
+        <!-- 📌 Dashboard Purpose -->
+        <section>
+          <h3>📊 Purpose</h3>
+          <p>Fund(a)Metrics helps investors explore mutual fund performance with clarity and control. Compare peers, track returns, and uncover insights—without the noise.</p>
+        </section>
+
+        <!-- 🧠 Methodology -->
+        <section>
+          <h3>🧠 Methodology</h3>
+          <p>Metrics are sourced from verified fund disclosures and normalized for consistency. Peer comparisons highlight top performers with dynamic averages and intuitive formatting.</p>
+        </section>
+
+        <!-- 🎨 Design Philosophy -->
+        <section>
+          <h3>🎨 Design Ethos</h3>
+          <p>Every layout is crafted for premium clarity—modular, responsive, and emotionally breathable. Tables, toggles, and cards are grouped with expressive intent.</p>
+        </section>
+
+        <!-- 🧰 Feature List -->
+        <section>
+          <h3>🧰 Features</h3>
+          <ul>
+            <li>Chart/Table toggle for visual and tabular views</li>
+            <li>Category and fund filtering</li>
+            <li>Peer comparison with dynamic averages</li>
+            <li>Metric cards showing fund vs category</li>
+            <li>Ratios tab with risk-adjusted metrics</li>
+          </ul>
+        </section>
+
+        <!-- 🚀 Future Vision -->
+        <section>
+          <h3>🚀 Vision</h3>
+          <p>We're exploring percentile ranks, export options, and deeper insights to make the dashboard even more intelligent and emotionally confident.</p>
+        </section>
+      </section>
+
+      <!-- 📍 Right Column: Creator Bio + Feedback Form -->
+      <aside class="about-right-column">
+
+        <!-- 🙋‍♂️ Creator Bio -->
+        <section class="about-card about-me-card">
+          <h3>👋 About Me</h3>
+          <p>Hi, I’m Ram—a passionate investor and dashboard designer. I’m not a SEBI-registered financial advisor, and this dashboard is not intended as investment advice. It’s a personal project built out of curiosity, creativity, and a love for data storytelling.</p>
+          <p>Every chart, table, and toggle reflects my belief that financial tools should be clear, expressive, and empowering. If you find this helpful or have ideas to improve it, I’d love to hear from you.</p>
+        </section>
+
+        <!-- 💬 Feedback Form -->
+        <section class="about-card feedback-card">
+          <h3>💬 Share Your Feedback</h3>
+          <p>Your thoughts help shape this dashboard. Whether it’s a suggestion, bug, or idea—I'm listening.</p>
+
+          <form action="https://formsubmit.co/rkgopisetty@gmail.com" method="POST">
+            <!-- 🛡️ FormSubmit hidden fields -->
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_subject" value="New Feedback from Fund(a)Metrics">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_next" value="index.html">
+
+            <!-- 📝 Form Fields -->
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" />
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" />
+
+            <label for="message">Your Feedback:</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+
+            <button type="submit">Send Feedback</button>
+          </form>
+
+          <!-- 📄 Footer -->
+          <footer class="footer">
+            &copy; 2025 Fund(a)Metrics Analytics. All rights reserved.
+          </footer>
+        </section>
+      </aside>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Fund(a)Metrics</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/cards.css">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header class="nav-container">
+    <div class="logo-left">
+      <img src="fm_logo2.png" alt="Fund(a)Metrics Logo">
+    </div>
+    <nav class="menu-bar">
+      <ul class="menu">
+        <li><a href="index.html" class="active">🏠 Home</a></li>
+        <li><a href="metrics.html">📊 Fund Metrics</a></li>
+        <li><a href="top.html">🥇 Top Funds</a></li>
+        <li><a href="analytics.html">📈 Analytics</a></li>
+        <li><a href="vault.html">🏦 Fund Vault</a></li>
+        <li><a href="about.html">ℹ️ About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="layout-container">
+    <!-- 🌍 Dual Indices Layout -->
+    <section class="dual-indices-layout">
+      <!-- 🇮🇳 Indian Market Table (Left) -->
+      <div class="market-table left-table">
+        <h3 class="section-subtitle">🇮🇳 Indian Market</h3>
+        <div id="homepage-fund-slice" class="fund-slice-table"></div>
+      </div>
+
+      <!-- 🔷 Site Header (Center) -->
+      <div class="site-header center-header">
+        <h1>Fund<span class="accent">(a)</span>Metrics</h1>
+        <h2>Empowering Individual Investors</h2>
+      </div>
+
+      <!-- 🌐 Global Market Table (Right) -->
+      <div class="market-table right-table">
+        <h3 class="section-subtitle">🇺🇸 US Market</h3>
+        <div id="homepage-global-slice" class="fund-slice-table"></div>
+      </div>
+    </section>
+
+
+    <!-- 🧠 Intro Summary (Full Width) -->
+    <section class="intro-summary">
+      <p>
+        Fund(a)Metrics is built for clarity, empowering investors to compare mutual funds, track performance, and
+        explore category-level insights with confidence.
+        Every feature is designed to be intuitive, visual, and focused—so you spend less time decoding data and more
+        time building conviction.
+      </p>
+    </section>
+
+
+
+    <!-- 🧩 What You Can Do -->
+    <section class="features-section">
+      <h2 class="section-title">Explore the Possibilities</h2>
+      <div class="features-grid">
+        <div class="feature-step">
+          <div class="feature-icon">📊</div>
+          <h3>Track</h3>
+          <p>Analyze fund returns across time. See key metrics, compare performance, and spot trends.</p>
+        </div>
+        <div class="feature-step">
+          <div class="feature-icon">🥇</div>
+          <h3>Explore</h3>
+          <p>Discover structured information across time. Filter by fund type, risk, and more.</p>
+        </div>
+        <div class="feature-step">
+          <div class="feature-icon">📈</div>
+          <h3>Analytics</h3>
+          <p>Dive into category-level metrics. Compare fund categories and see how they evolve.</p>
+        </div>
+        <div class="feature-step">
+          <div class="feature-icon">🏦</div>
+          <h3>Vault</h3>
+          <p>Save and revisit your favorite funds. The Fund Vault makes tracking easy.</p>
+        </div>
+      </div>
+    </section>
+
+
+    <script src="global.js"></script>
+    <script src="home.js"></script>
+
+    <!-- 📦 Closing Summary -->
+    <section class="summary">
+      <p>
+        We believe data should be intuitive, not intimidating. That’s why every chart, table, and toggle
+        is designed to highlight what matters most—so you can focus on your portfolio, not the noise.
+      </p>
+      <p>
+        Fund(a)Metrics transforms raw data into actionable insights. With precision and polish,
+        we help individual investors make smarter, more confident decisions.
+      </p>
+      <p><strong>Start exploring. Your portfolio deserves clarity.</strong></p>
+    </section>
+  </main>
+
+</body>
+
+</html>

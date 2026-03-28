@@ -1,0 +1,70 @@
+/* 🔷 About Page Layout */
+.about-layout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  max-width: 1200px;
+  margin: 0 auto; /* 👈 This centers it horizontally */
+  padding: 0 0rem; /* 👈 Optional: adds breathing room on both sides */
+}
+
+
+/* 📊 Dashboard Card (Left Side) */
+.dashboard-card {
+  flex: 1 1 0;
+  background: linear-gradient(135deg, rgba(0,123,255,0.05), rgba(0,123,255,0.15));
+  padding: 0.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* 📍 Right Column (About Me + Feedback) */
+.about-right-column {
+  flex: 0 0 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Added gap between stacked cards */
+}
+
+/* 🔶 Shared Card Styling */
+.about-card {
+  background: linear-gradient(135deg, rgba(0,123,255,0.05), rgba(0,123,255,0.15));
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* 💬 Feedback Form Styling */
+.about-card form {
+  background: linear-gradient(135deg, rgba(0,123,255,0.05), rgba(0,123,255,0.15));
+  display: flex;
+  flex-direction: column;
+  gap: 0rem;
+  margin-top: 0rem;
+}
+
+.about-card input,
+.about-card textarea {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.about-card button {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.about-card h3,
+.about-card p,
+.about-card .group-label {
+  text-align: left !important;
+}
+
