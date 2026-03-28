@@ -43,10 +43,14 @@ exports.handler = async function (event) {
 
     // Fetch all pages for a tab
     const fetchAllPages = async (category, tab) => {
+      // Flexi-Cap must NOT include schemePlan
+      const schemePlanParam =
+        category === "Flexi-Cap" ? "" : "&schemePlan=Direct+Plan";
+
       const BASE =
         `https://api.moneycontrol.com/swiftapi/v1/mutualfunds/getSchemeCollection` +
         `?responseType=json&deviceType=W&collection=ALL&invType=Equity` +
-        `&invCategory=${category}&schemePlan=Direct+Plan`;
+        `&invCategory=${category}${schemePlanParam}`;
 
       const firstJson = await safeFetchJSON(`${BASE}&tab=${tab}&page=1&pageSize=25`);
       if (!firstJson) return [];
