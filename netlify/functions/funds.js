@@ -19,7 +19,6 @@ exports.handler = async function (event) {
       ? Object.values(CATEGORY_MAP)
       : [CATEGORY_MAP[queryCategory.toLowerCase()]];
 
-    // If invalid category
     if (categoriesToFetch.includes(undefined)) {
       return {
         statusCode: 400,
@@ -27,23 +26,37 @@ exports.handler = async function (event) {
       };
     }
 
-    // Safe JSON parser (prevents crashes)
-    const safeFetchJSON = async (url) => {
-      const res = await fetch(url);
-      const text = await res.text();
+    // ⭐ Browser-like headers to bypass Moneycontrol 403
+    const FETCH_HEADERS = {
+      "User-Agent":
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
+        "(KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
+      "Accept": "application/json,text/html,*/*",
+      "Accept-Language": "en-US,en;q=0.9",
+      "Referer": "https://www.moneycontrol.com/"
+    };
 
+    // Safe JSON parser
+    const safeFetchJSON = async (url) => {
       try {
-        return JSON.parse(text);
-      } catch (e) {
-        console.log("Invalid JSON from:", url);
-        console.log("Response snippet:", text.slice(0, 200));
+        const res = await fetch(url, { headers: FETCH_HEADERS });
+        const text = await res.text();
+
+        try {
+          return JSON.parse(text);
+        } catch (e) {
+          console.log("Invalid JSON from:", url);
+          console.log("Response snippet:", text.slice(0, 200));
+          return null;
+        }
+      } catch (err) {
+        console.log("Fetch failed:", url, err.message);
         return null;
       }
     };
 
     // Fetch all pages for a tab
     const fetchAllPages = async (category, tab) => {
-      // Flexi-Cap must NOT include schemePlan
       const schemePlanParam =
         category === "Flexi-Cap" ? "" : "&schemePlan=Direct+Plan";
 
@@ -72,7 +85,6 @@ exports.handler = async function (event) {
 
     let finalData = [];
 
-    // Loop through each category
     for (const category of categoriesToFetch) {
       console.log("Fetching category:", category);
 
@@ -104,7 +116,6 @@ exports.handler = async function (event) {
           Scheme: item.schemeName,
           Code: item.schemeCode,
 
-          // Returns
           "1W": getReturn("1W"),
           "1M": getReturn("1M"),
           "3M": getReturn("3M"),
@@ -117,7 +128,6 @@ exports.handler = async function (event) {
           "10Y": getReturn("10Y"),
           INCEPTION: getReturn("INCEPTION"),
 
-          // Risk ratios
           Beta: rr.beta ?? null,
           Sharpe: rr.sharpeRatio ?? null,
           Treynor: rr.treynorRatio ?? null,
@@ -126,7 +136,6 @@ exports.handler = async function (event) {
           UpCap: rr.upsideCaptureRatio ?? null,
           DownCap: rr.downsideCaptureRatio ?? null,
 
-          // Snapshot
           NAV: s.navValue ?? null,
           NAVDate: s.navDate ?? null,
           AUM: s.aum ?? null,
@@ -135,7 +144,6 @@ exports.handler = async function (event) {
           ExitLoad: s.exitLoadRate ?? null,
           InceptionDate: s.inceptionDate ?? null,
 
-          // Rating + Rank
           Rating: snap?.rating ?? null,
           Rank: snap?.rank ?? null
         };
