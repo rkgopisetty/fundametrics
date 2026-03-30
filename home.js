@@ -1,68 +1,60 @@
 (async () => {
-    const data = await window.FundUtils.loadFreshData();
-    if (!data || data.length < 6) return;
+  // Load index data (Indian + US merged)
+  const indices = await window.FundUtils.loadIndexData();
+  if (!indices || indices.length === 0) {
+    console.warn("No index data found");
+    return;
+  }
 
-    const startRow = 1; // Skip header row
-    const endRow = 5;
-    console.log("Last few headers:", data[0].slice(26, 41));
+  // Define which indices belong to which table
+  const indianList = [
+    "NIFTY 50",
+    "SENSEX",
+    "NIFTY BANK",
+    "NIFTY IT"
+    // NIFTY Auto excluded
+  ];
 
-    // 🇮🇳 Indian Market Table (AF to AI = 30 to 33)
-    const indianStartCol = 31;
-    const indianEndCol = 35;
-    const indianHeader = data[0].slice(indianStartCol, indianEndCol);
-    const indianSlice = data.slice(startRow, endRow).map(row => row.slice(indianStartCol, indianEndCol));
+  const globalList = [
+    "DOW JONES",
+    "NASDAQ",
+    "S&P 500",
+    "USD INDEX"
+  ];
 
-    document.getElementById("homepage-fund-slice").innerHTML = `
-  <table>
-    <thead><tr>${indianHeader.map(h => `<th>${h || "—"}</th>`).join("")}</tr></thead>
-    <tbody>
-      ${indianSlice.map(row => `<tr>${row.map((cell, colIndex) => {
-        const cleaned = cell?.replace(/\(.*?\)/g, "").trim();
-        const value = parseFloat(cleaned?.replace(/[^0-9.-]/g, ""));
-        let color = "";
+  const indianIndices = indices.filter(i => indianList.includes(i["Index"]));
+  const globalIndices = indices.filter(i => globalList.includes(i["Index"]));
 
-        // Apply color to Change (index 2) and %Chg (index 3)
-        if (colIndex === 2 || colIndex === 3) {
-            if (!isNaN(value)) {
-                color = value > 0 ? "green" : value < 0 ? "red" : "";
-            }
-        }
+  function renderTable(targetId, rows) {
+    const headers = ["Index", "Price", "Change", "%Chg"];
 
-        return `<td style="color:${color}">${cleaned || "—"}</td>`;
-    }).join("")
-        }</tr>`).join("")}
-    </tbody>
-  </table>
-`;
+    document.getElementById(targetId).innerHTML = `
+      <table>
+        <thead>
+          <tr>${headers.map(h => `<th>${h}</th>`).join("")}</tr>
+        </thead>
+        <tbody>
+          ${rows.map(row => {
+            const change = parseFloat(row["Change"]);
+            const pct = parseFloat(row["%Chg"]);
 
+            const changeColor = isNaN(change) ? "" : change > 0 ? "green" : "red";
+            const pctColor = isNaN(pct) ? "" : pct > 0 ? "green" : "red";
 
-    // 🌐 Global Market Table (AK to AN = 35 to 39)
-    const globalStartCol = 36;
-    const globalEndCol = 41;
-    const globalHeader = data[0].slice(globalStartCol, globalEndCol);
-    const globalSlice = data.slice(startRow, endRow).map(row => row.slice(globalStartCol, globalEndCol));
+            return `
+              <tr>
+                <td>${row["Index"]}</td>
+                <td>${row["Price"]}</td>
+                <td style="color:${changeColor}">${row["Change"]}</td>
+                <td style="color:${pctColor}">${row["%Chg"]}</td>
+              </tr>
+            `;
+          }).join("")}
+        </tbody>
+      </table>
+    `;
+  }
 
-    document.getElementById("homepage-global-slice").innerHTML = `
-  <table>
-    <thead><tr>${globalHeader.map(h => `<th>${h || "—"}</th>`).join("")}</tr></thead>
-    <tbody>
-      ${globalSlice.map(row => `<tr>${row.map((cell, colIndex) => {
-        const cleaned = cell?.replace(/\(.*?\)/g, "").trim();
-        const value = parseFloat(cleaned?.replace(/[^0-9.-]/g, ""));
-        let color = "";
-
-        // Apply color to Change (index 2) and %Chg (index 3)
-        if (colIndex === 2 || colIndex === 3) {
-            if (!isNaN(value)) {
-                color = value > 0 ? "green" : value < 0 ? "red" : "";
-            }
-        }
-
-        return `<td style="color:${color}">${cleaned || "—"}</td>`;
-    }).join("")
-        }</tr>`).join("")}
-    </tbody>
-  </table>
-`;
-
+  renderTable("homepage-fund-slice", indianIndices);
+  renderTable("homepage-global-slice", globalIndices);
 })();

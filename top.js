@@ -12,66 +12,62 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
+      // ⭐ Clean category mapping (HTML → Backend)
       const categoryMap = {
-        LargeCap: "*Large Cap Fund*",
-        MidCap: "*Mid Cap Fund*",
-        SmallCap: "*Small Cap Fund*",
-        FlexiCap: "*Flexi Cap Fund*",
-        Contra: "*Contra Fund*",
-        MultiCap: "*Multi Cap Fund*"
+        LargeCap: "Large-Cap",
+        MidCap: "Mid-Cap",
+        SmallCap: "Small-Cap",
+        MultiCap: "Multi-Cap",
+        FlexiCap: "Flexi-Cap",
+        Contra: "Contra"
       };
 
+      // ⭐ Category descriptions
       const descriptions = {
-        LargeCap: "Large-cap mutual funds invest in India’s top 100 companies by market capitalization—trusted household brands that most Indians interact with daily.",
-        MidCap: "Mid-cap funds invest in medium-sized companies with high growth potential and moderate risk.",
-        SmallCap: "Small-cap funds target emerging companies with aggressive growth strategies, often with higher volatility.",
-        FlexiCap: "Flexi-cap funds dynamically invest across large, mid, and small-cap segments, offering flexible exposure.",
-        Contra: "Contra funds follow a contrarian strategy, investing in undervalued sectors or stocks against prevailing market trends.",
-        MultiCap: "Multicap funds allocate at least 25% to large, mid, and small-cap stocks—offering balanced exposure across market segments."
+        "Large-Cap": "Large-cap mutual funds invest in India’s top 100 companies by market capitalization—trusted household brands that most Indians interact with daily.",
+        "Mid-Cap": "Mid-cap funds invest in medium-sized companies with high growth potential and moderate risk.",
+        "Small-Cap": "Small-cap funds target emerging companies with aggressive growth strategies, often with higher volatility.",
+        "Flexi-Cap": "Flexi-cap funds dynamically invest across large, mid, and small-cap segments, offering flexible exposure.",
+        "Contra": "Contra funds follow a contrarian strategy, investing in undervalued sectors or stocks against prevailing market trends.",
+        "Multi-Cap": "Multicap funds allocate at least 25% to large, mid, and small-cap stocks—offering balanced exposure across market segments."
       };
 
-      const rangeColumnMap = {
-        "1W": 5, "1M": 6, "3M": 7, "6M": 8, "YTD": 9,
-        "1Y": 10, "2Y": 11, "3Y": 12, "5Y": 13, "10Y": 14
-      };
-
-      function getMedal(index) {
-        const medals = ["🥇", "🥈", "🥉"];
-        return medals[index] || index + 1;
-      }
-
-      // 🔥 Render default top funds (1Y)
+      // ⭐ Default Top Funds (1Y)
       renderDefaultTopFunds("1Y");
 
-      // ⏱️ Time toggle for TopDefault-section
+      // ============================================================
+      // ⭐ FIXED: Default Time Toggle — isolated, safe
+      // ============================================================
       document.querySelectorAll('#TopDefault-ranges button').forEach(button => {
-        button.addEventListener('click', () => {
+        button.addEventListener('click', (e) => {
+          e.stopPropagation();
+
           const rangeKey = button.dataset.range;
 
-          document.querySelectorAll('#TopDefault-ranges button').forEach(btn => btn.classList.remove('active'));
+          document.querySelectorAll('#TopDefault-ranges button')
+            .forEach(btn => btn.classList.remove('active'));
+
           button.classList.add('active');
 
           renderDefaultTopFunds(rangeKey);
+
+          document.getElementById("TopDefault-section").classList.remove("hidden");
         });
       });
 
+      // ============================================================
+      // ⭐ Render Top 10 Across All Categories
+      // ============================================================
       function renderDefaultTopFunds(rangeKey = "1Y") {
-        const colIndex = rangeColumnMap[rangeKey];
-        if (colIndex === undefined) return;
-
-        const validRows = fundData
-          .filter((row, i) => i > 0 && !isNaN(parseFloat(row[colIndex])))
-          .sort((a, b) => parseFloat(b[colIndex]) - parseFloat(a[colIndex]))
-          .slice(0, 10)
-          .map(row => {
-            const newRow = [...row];
-            newRow[10] = row[colIndex];
-            return newRow;
-          });
+        const validFunds = fundData
+          .filter(f => !isNaN(parseFloat(f[rangeKey])))
+          .sort((a, b) => parseFloat(b[rangeKey]) - parseFloat(a[rangeKey]))
+          .slice(0, 10);
 
         const tbody = document.getElementById("TopDefault-table");
         const thead = document.getElementById("TopDefault-thead");
         const heading = document.getElementById("TopDefault-heading");
+
         if (!tbody || !thead || !heading) return;
 
         const rangeLabels = {
@@ -87,46 +83,81 @@ document.addEventListener("DOMContentLoaded", () => {
           "10Y": "10 Years"
         };
 
-        const readableRange = rangeLabels[rangeKey] || rangeKey;
-        heading.innerHTML = `Top 10 Funds Across All Categories <span class="highlight-range">(${readableRange})</span>`;
-
+        heading.innerHTML = `Top 10 Funds Across All Categories <span class="highlight-range">(${rangeLabels[rangeKey]})</span>`;
 
         tbody.innerHTML = "";
         thead.innerHTML = "";
 
-        const headerIndexes = [0, 1, 2, 3, 4, 10];
         const headerRow = document.createElement("tr");
+        const headers = [
+          "Rank",
+          "Scheme Name",
+          "Category",
+          "NAV",
+          "Exp Ratio",
+          "AUM (Cr)",
+          "MStar Rating",
+          "Up Cap",
+          "Down Cap",
+          `${rangeKey} Return ↓`
+        ];
 
-        headerIndexes.forEach(i => {
+        headers.forEach(h => {
           const th = document.createElement("th");
-          th.dataset.index = i;
-          th.textContent = i === 10 ? `${rangeKey} Return ↓` : fundData[0][i] || `Column ${i + 1}`;
+          th.textContent = h;
           headerRow.appendChild(th);
         });
 
         thead.appendChild(headerRow);
-        renderSortedRows(validRows, tbody, headerIndexes);
+
+        validFunds.forEach((fund, index) => {
+          const tr = document.createElement("tr");
+
+          tr.innerHTML = `
+            <td>
+              <span class="medal-badge rank-${index + 1}">
+                ${getMedal(index)}
+              </span>
+            </td>
+
+            <td>${fund["Scheme Name"]}</td>
+            <td>${fund["Category"]}</td>
+
+            <td>${fund["NAV"] ?? "—"}</td>
+            <td>${fund["Exp Ratio"] ? fund["Exp Ratio"] + "%" : "—"}</td>
+            <td>₹${Number(fund["AuM (Cr)"]).toLocaleString()}</td>
+
+            <td>${renderStars(fund["MStar Rating"])}</td>
+
+            <td>${fund["Up Capture"] ? fund["Up Capture"] + "%" : "—"}</td>
+            <td>${fund["Down Capture"] ? fund["Down Capture"] + "%" : "—"}</td>
+
+            <td>${parseFloat(fund[rangeKey]).toFixed(2)}%</td>
+          `;
+
+          tbody.appendChild(tr);
+        });
       }
 
+      // ============================================================
+      // ⭐ Category Card Click
+      // ============================================================
       document.querySelectorAll(".category-card").forEach(card => {
         card.addEventListener("click", e => {
           e.preventDefault();
+
           const key = card.dataset.category;
+          const backendCategory = categoryMap[key];
 
           document.querySelectorAll(".category-card").forEach(c => c.classList.remove("active"));
           card.classList.add("active");
 
           const descBox = document.getElementById("categoryDescription");
-          if (descBox) {
-            const description = descriptions[key];
-            descBox.textContent = description || "";
-            descBox.style.display = description ? "block" : "none";
-            descBox.style.opacity = description ? "1" : "0";
-          }
+          descBox.textContent = descriptions[backendCategory] || "";
+          descBox.style.display = "block";
+          descBox.style.opacity = "1";
 
           document.querySelectorAll(".fund-table").forEach(section => section.classList.add("hidden"));
-          document.querySelectorAll(".fund-table tbody").forEach(tbody => tbody.innerHTML = "");
-          document.querySelectorAll(".fund-table thead").forEach(thead => thead.innerHTML = "");
 
           renderCategoryTable(key, "1Y");
 
@@ -140,24 +171,35 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       });
 
-      document.querySelectorAll(".time-range-selector button").forEach(button => {
-        button.addEventListener("click", () => {
-          const range = button.dataset.range;
-          const section = button.closest(".fund-table");
-          const categoryKey = section.id.replace("-section", "");
+      // ============================================================
+      // ⭐ FIXED: Category Time Toggles — explicit, safe
+      // ============================================================
+      const categoryKeys = ["FlexiCap", "MidCap", "SmallCap", "Contra", "MultiCap", "LargeCap"];
 
-          section.classList.remove("hidden");
-          section.querySelectorAll("button").forEach(btn => btn.classList.remove("active"));
-          button.classList.add("active");
+      categoryKeys.forEach(key => {
+        const rangeContainer = document.getElementById(`${key}-ranges`);
+        if (!rangeContainer) return;
 
-          renderCategoryTable(categoryKey, range);
+        rangeContainer.querySelectorAll("button").forEach(button => {
+          button.addEventListener("click", () => {
+            const range = button.dataset.range;
+
+            rangeContainer.querySelectorAll("button").forEach(btn => btn.classList.remove("active"));
+            button.classList.add("active");
+
+            renderCategoryTable(key, range);
+          });
         });
       });
 
+      // ============================================================
+      // ⭐ Render Category Table
+      // ============================================================
       function renderCategoryTable(key, rangeKey = "1Y") {
+        const backendCategory = categoryMap[key];
+
         const heading = document.getElementById(`${key}-heading`);
         if (heading) {
-          const readableLabel = categoryMap[key].replace(/\*/g, "");
           const rangeLabels = {
             "1W": "1 Week",
             "1M": "1 Month",
@@ -171,79 +213,90 @@ document.addEventListener("DOMContentLoaded", () => {
             "10Y": "10 Years"
           };
 
-          const readableRange = rangeLabels[rangeKey] || rangeKey;
-          heading.innerHTML = `Top 10 Funds in ${readableLabel} <span class="highlight-range">(${readableRange})</span>`;
-
-
+          heading.innerHTML = `Top 10 Funds in ${backendCategory} <span class="highlight-range">(${rangeLabels[rangeKey]})</span>`;
         }
 
-        const rows = getFundDataForRange(key, rangeKey);
+        const rows = fundData
+          .filter(f => f["Category"] === backendCategory && !isNaN(parseFloat(f[rangeKey])))
+          .sort((a, b) => parseFloat(b[rangeKey]) - parseFloat(a[rangeKey]))
+          .slice(0, 10);
+
         const tbody = document.getElementById(`${key}-table`);
         const thead = document.getElementById(`${key}-thead`);
-        if (!tbody || !thead || rows.length === 0) return;
+
+        if (!tbody || !thead) return;
 
         tbody.innerHTML = "";
         thead.innerHTML = "";
 
-        const headerIndexes = [0, 1, 2, 3, 4, 10];
         const headerRow = document.createElement("tr");
+        const headers = [
+          "Rank",
+          "Scheme Name",
+          "Category",
+          "NAV",
+          "Exp Ratio",
+          "AUM (Cr)",
+          "MStar Rating",
+          "Up Cap",
+          "Down Cap",
+          `${rangeKey} Return ↓`
+        ];
 
-        headerIndexes.forEach(i => {
+        headers.forEach(h => {
           const th = document.createElement("th");
-          th.dataset.index = i;
-          th.textContent = i === 10 ? `${rangeKey} Return ↓` : fundData[0][i] || `Column ${i + 1}`;
+          th.textContent = h;
           headerRow.appendChild(th);
         });
 
         thead.appendChild(headerRow);
-        renderSortedRows(rows, tbody, headerIndexes);
-      }
 
-      function getFundDataForRange(categoryKey, rangeKey) {
-        const colIndex = rangeColumnMap[rangeKey];
-        if (colIndex === undefined) return [];
-
-        return fundData
-          .filter(row => row[2] === categoryMap[categoryKey] && !isNaN(parseFloat(row[colIndex])))
-          .sort((a, b) => parseFloat(b[colIndex]) - parseFloat(a[colIndex]))
-          .slice(0, 10)
-          .map(row => {
-            const newRow = [...row];
-            newRow[10] = row[colIndex];
-            return newRow;
-          });
-      }
-
-      function renderSortedRows(data, tbody, headerIndexes) {
-        const crisilIndex = headerIndexes.includes(3) ? 3 : -1;
-
-        data.forEach((row, rowIndex) => {
+        rows.forEach((fund, index) => {
           const tr = document.createElement("tr");
-          tr.className = rowIndex % 2 === 0 ? "even-row" : "odd-row";
 
-          headerIndexes.forEach(i => {
-            const td = document.createElement("td");
-            td.dataset.index = i;
+          tr.innerHTML = `
+            <td>
+              <span class="medal-badge rank-${index + 1}">
+                ${getMedal(index)}
+              </span>
+            </td>
 
-            if (i === crisilIndex) {
-              const rating = parseInt(row[i]);
-              td.innerHTML = isNaN(rating)
-                ? '<span class="star empty">★</span>'.repeat(5)
-                : FundUtils.renderCrisilStars(rating);
-            } else if (i === 0) {
-              const medal = getMedal(rowIndex);
-              td.innerHTML = `<span class="medal-badge rank-${rowIndex + 1}">${medal}</span> ${row[i]}`;
-            } else {
-              td.textContent = i === 10
-                ? `${parseFloat(row[i]).toFixed(2)}%`
-                : row[i];
-            }
+            <td>${fund["Scheme Name"]}</td>
+            <td>${fund["Category"]}</td>
 
-            tr.appendChild(td);
-          });
+            <td>${fund["NAV"] ?? "—"}</td>
+            <td>${fund["Exp Ratio"] ? fund["Exp Ratio"] + "%" : "—"}</td>
+            <td>₹${Number(fund["AuM (Cr)"]).toLocaleString()}</td>
+
+            <td>${renderStars(fund["MStar Rating"])}</td>
+
+            <td>${fund["Up Capture"] ? fund["Up Capture"] + "%" : "—"}</td>
+            <td>${fund["Down Capture"] ? fund["Down Capture"] + "%" : "—"}</td>
+
+            <td>${parseFloat(fund[rangeKey]).toFixed(2)}%</td>
+          `;
 
           tbody.appendChild(tr);
         });
+      }
+
+      // ============================================================
+      // ⭐ Helpers
+      // ============================================================
+      function getMedal(index) {
+        const medals = ["🥇", "🥈", "🥉"];
+        return medals[index] || index + 1;
+      }
+
+      function renderStars(rating) {
+        const r = Number(rating);
+        if (isNaN(r)) return "—";
+
+        let html = "";
+        for (let i = 1; i <= 5; i++) {
+          html += `<span class="star ${i <= r ? "filled" : "empty"}">★</span>`;
+        }
+        return html;
       }
 
     })
@@ -251,4 +304,3 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("❌ Failed to load fund data:", err);
     });
 });
-``

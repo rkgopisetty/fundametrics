@@ -30,11 +30,10 @@
     </header>
 
     <main class="layout-container">
-    <!-- 📊 Page Title -->
     <div class="page-container">
       <h2 class="page-title">Fund<span class="accent">(a)</span>Mentals: Performance Insights</h2>
 
-      <!-- 🔽 Category & Fund Selectors -->
+      <!-- Category & Fund Selectors -->
       <div class="analytics-controls" id="selectors">
         <div class="filter-group">
           <label for="categoryFilter">Category:</label>
@@ -50,24 +49,65 @@
         </div>
       </div>
 
-      <!-- 📈 Metrics Container -->
+      <!-- Metrics Container -->
       <div class="metrics-container">
-        <section id="fundIdentity" class="fund-identity" style="display: none;"></section>
+
+        <!-- ⭐ UPDATED IDENTITY CARD TEMPLATE -->
+<section id="fundIdentity" class="fund-identity" style="display: none;">
+  <h3 class="fund-title" id="fi-name"></h3>
+
+  <div class="fund-tags-row">
+    <div class="fund-tags">
+      <span class="tag">Equity</span>
+      <span class="tag" id="fi-category"></span>
+    </div>
+
+    <!-- NAV -->
+    <div class="metric-inline">
+      <label>NAV</label>
+      <div class="metric-value" id="fi-nav"></div>
+    </div>
+
+    <!-- 1W Change -->
+    <div class="metric-inline">
+      <label>1W Change</label>
+      <div class="metric-value change-cell" id="fi-1w"></div>
+    </div>
+
+    <!-- Expense Ratio -->
+    <div class="metric-inline">
+      <label>Expense Ratio</label>
+      <div class="metric-value" id="fi-exp"></div>
+    </div>
+
+    <!-- MStar Rating -->
+    <div class="metric-inline">
+      <label>MStar Rating</label>
+      <div class="metric-value" id="fi-mstar"></div>
+    </div>
+
+    <!-- AUM -->
+    <div class="metric-inline">
+      <label>AUM</label>
+      <div class="metric-value" id="fi-aum"></div>
+    </div>
+  </div>
+</section>
+
+
         <section id="fundMetrics" class="fund-metrics"></section>
 
-        <!-- 🔀 Chart/Table Toggle -->
+        <!-- Chart/Table Toggle -->
         <div id="view-section" style="display: none;">
           <div class="toggle-buttons chart-toggle">
             <button id="toggle-chart" class="chart-tab active">📈 Chart</button>
             <button id="toggle-table" class="chart-tab">📊 Table</button>
           </div>
 
-          <!-- 📊 Chart Canvas -->
           <div id="chart-container">
             <canvas id="fundVsCategoryChart" width="600" height="300"></canvas>
           </div>
 
-          <!-- 🧩 Comparison Table + Cards -->
           <div id="comparison-wrapper" class="comparison-wrapper" style="display: none;">
             <div id="table-container">
               <table class="metrics-table">
@@ -82,12 +122,9 @@
               </table>
             </div>
 
-            <div id="card-container" class="card-grid">
-              <!-- Cards will be injected here -->
-            </div>
+            <div id="card-container" class="card-grid"></div>
           </div>
 
-          <!-- 🧠 Peer Comparison Section -->
           <div id="peer-comparison" class="peer-comparison" style="display: none;">
             <div class="peer-header">
               <h3 class="section-label">Peer Comparison</h3>
@@ -105,11 +142,9 @@
         </div>
       </div>
 
-      <!-- 📦 Scripts -->
       <script src="global.js"></script>
       <script src="metrics.js"></script>
 
-      <!-- 🧠 Active Page Highlight -->
       <script>
         const currentPage = window.location.pathname.split("/").pop();
         document.querySelectorAll(".menu a").forEach(link => {

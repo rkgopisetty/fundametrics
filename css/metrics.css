@@ -52,7 +52,7 @@
   align-items: center;
   flex-wrap: wrap;
   padding-left: 0rem;
-  gap: 10rem;
+  gap: 3rem;
   margin-top: 0rem;
 }
 
@@ -230,6 +230,16 @@
   text-overflow: ellipsis;
 }
 
+/* Hover effect for Fund label */
+label[for="fundFilter"] {
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+label[for="fundFilter"]:hover {
+  background-color: #e0f0ff;
+  color: #007bff; /* or whatever your old hover color was */
+}
 
 
 

@@ -130,17 +130,20 @@
 }
 
 .medal-badge {
-  display: inline-block;
-  min-width: 24px;
-  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
   border-radius: 50%;
-  text-align: center;
-  font-weight: bold;
+  font-weight: 700;
+  font-size: 1.1rem;
   color: white;
-  margin-right: 6px;
-  font-size: 0.9rem;
+  margin-right: 8px;
   background-color: #5b3f86;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
+
 
 .rank-1 { background-color: gold; }
 .rank-2 { background-color: silver; }
@@ -154,3 +157,13 @@
   color: #2a3b8f;
 }
 
+/* Right-align numeric columns */
+.top-fund-tables td:nth-child(4),  /* NAV */
+.top-fund-tables td:nth-child(5),  /* Exp Ratio */
+.top-fund-tables td:nth-child(6),  /* AUM (Cr) */
+.top-fund-tables td:nth-child(7),  /* MStar Rating */
+.top-fund-tables td:nth-child(8),  /* Up Cap */
+.top-fund-tables td:nth-child(9)   /* Down Cap */
+{
+  text-align: right;
+}

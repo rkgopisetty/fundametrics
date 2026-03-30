@@ -2,58 +2,42 @@
   // 🌐 Google Sheets API Configuration
   const sheetID = '1BU8mswQ-wrQn7-taW5lIiSvPH2GzqMWjKNiBvwVOztg';
   const apiKey = 'AIzaSyD7rRtGbkzHRloCXAA8ptJc8bIuGwmjvmE';
-  const range = 'Final!A5:AN184';
 
-  // 📦 Data Fetching & Storage Utilities
+  // FUND DATA RANGE (unchanged)
+  const range = 'FinalV2!A6:AG194';
+
+  // 🧱 FUND SCHEMA
+  const FUND_SCHEMA = [
+    "Scheme Name", "Category", "MStar Rating", "NAV", "Exp Ratio", "AuM (Cr)",
+    "1W", "1M", "3M", "6M", "YTD", "1Y", "2Y", "3Y", "5Y", "10Y",
+    "1W Rank", "1M Rank", "3M Rank", "6M Rank", "YTD Rank", "1Y Rank",
+    "2Y Rank", "3Y Rank", "5Y Rank", "10Y Rank",
+    "SD", "Beta", "Sharpe", "Sortino", "Treynor",
+    "Up Capture", "Down Capture"
+  ];
+
+  const CATEGORY_FIELD = "Category";
+
+  // 📦 Fetch any range
   const fetchFundData = (sheetID, range, apiKey) => {
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/${range}?key=${apiKey}`;
     return fetch(url)
       .then(res => res.json())
-      .then(data => {
-        console.log("📦 Raw response from Sheets API:", data);
-        return Array.isArray(data.values) ? data.values : [];
-      });
+      .then(data => Array.isArray(data.values) ? data.values : []);
   };
 
-  const saveToLocal = (key, value) => {
-    localStorage.setItem(key, JSON.stringify(value));
-  };
-
-  const loadFromLocal = (key) => {
-    const raw = localStorage.getItem(key);
-    return raw ? JSON.parse(raw) : null;
-  };
+  const saveToLocal = (key, value) => localStorage.setItem(key, JSON.stringify(value));
+  const loadFromLocal = (key) => JSON.parse(localStorage.getItem(key) || "null");
 
   // 🧠 Utility Functions
-  const getUniqueSorted = (values) => {
-    return [...new Set(values)].filter(Boolean).sort();
-  };
+  const getUniqueSorted = (values) => [...new Set(values)].filter(Boolean).sort();
+  const cleanCategoryName = (raw) => (raw || "").replace(/\*/g, "").replace(/ Fund$/i, "").trim();
 
-  const cleanCategoryName = (raw) => {
-    return (raw || "").replace(/\*/g, "").replace(/ Fund$/i, "").trim();
-  };
-
-  // 🎛️ Category Filter Dropdown Generator
-  const populateCategoryFilter = (
-    rows,
-    selectId,
-    columnLabel,
-    onChangeCallback,
-    defaultLabel = "-- Choose a Category --"
-  ) => {
+  const populateCategoryFilter = (rows, selectId, onChangeCallback, defaultLabel = "-- Choose a Category --") => {
     const select = document.getElementById(selectId);
-    if (!select || rows.length < 2) return;
+    if (!select || rows.length === 0) return;
 
-    const categoryIndex = rows[0].indexOf(columnLabel);
-    if (categoryIndex === -1) {
-      console.warn(`Column "${columnLabel}" not found.`);
-      return;
-    }
-
-    const categories = getUniqueSorted(
-      rows.slice(1).map(r => cleanCategoryName(r[categoryIndex]))
-    );
-
+    const categories = getUniqueSorted(rows.map(r => cleanCategoryName(r[CATEGORY_FIELD])));
     select.innerHTML = `<option value="">${defaultLabel}</option>`;
 
     categories.forEach(cat => {
@@ -65,72 +49,40 @@
 
     select.onchange = () => {
       const selected = select.value;
-      const header = rows[0];
-      const data = rows.slice(1);
       const filtered = selected
-        ? data.filter(r => cleanCategoryName(r[categoryIndex]) === selected)
-        : data;
-      onChangeCallback([header, ...filtered]);
+        ? rows.filter(r => cleanCategoryName(r[CATEGORY_FIELD]) === selected)
+        : rows;
+      onChangeCallback(filtered);
     };
   };
 
-  // 📊 Category Average Calculator
-  const getCategoryAverages = (data, header, categoryName, timeRanges, includeAUM = false) => {
-    const cleanedTarget = cleanCategoryName(categoryName);
+  const getCategoryAverages = (data, categoryName, fields) => {
+    const cleaned = cleanCategoryName(categoryName);
+    const rows = data.filter(r => cleanCategoryName(r[CATEGORY_FIELD]) === cleaned);
 
-    const categoryRows = data.filter(r => {
-      const rawCategory = r[2] || "";
-      return cleanCategoryName(rawCategory) === cleanedTarget;
-    });
+    return fields.map(field => {
+      const values = rows
+        .map(r => parseFloat((r[field] || "").toString().replace("%", "")))
+        .filter(v => !isNaN(v));
 
-    const startIndex = 5;
-    const returnIndices = timeRanges.map((_, i) => startIndex + i);
-    const ratioIndices = Array.from({ length: 5 }, (_, i) => 25 + i);
-
-    const indices = [
-      ...(includeAUM ? [4] : []),
-      ...returnIndices,
-      ...ratioIndices
-    ];
-
-    return indices.map(idx => {
-      const values = categoryRows
-        .map(r => {
-          const raw = r[idx];
-          if (!raw || typeof raw === "string" && raw.trim() === "") return null;
-
-          let parsed = typeof raw === "string"
-            ? parseFloat(raw.replace("%", "").replace(",", ""))
-            : typeof raw === "number"
-            ? raw
-            : parseFloat(raw);
-
-          if (isNaN(parsed) || Math.abs(parsed) > 500) return null;
-          return parsed;
-        })
-        .filter(v => v !== null);
-
-      const sum = values.reduce((a, b) => a + b, 0);
-      return values.length ? +(sum / values.length).toFixed(2) : null;
+      if (!values.length) return null;
+      return +(values.reduce((a, b) => a + b, 0) / values.length).toFixed(2);
     });
   };
 
-  // ⭐ Crisil Rating Renderer
   const renderCrisilStars = (rating) => {
     const maxStars = 5;
     const parsed = parseInt(rating);
     const filled = isNaN(parsed) ? 0 : Math.min(parsed, maxStars);
     const empty = maxStars - filled;
 
-    const stars = [
+    return [
       ...Array(filled).fill('<span class="star filled">★</span>'),
       ...Array(empty).fill('<span class="star empty">★</span>')
-    ];
-
-    return stars.join('');
+    ].join('');
   };
 
-  // 🔄 Refresh Logic
+  // 🔄 Refresh Logic (funds only)
   const refreshFromSheet = async () => {
     const freshData = await fetchFundData(sheetID, range, apiKey);
     saveToLocal("fundData", freshData);
@@ -139,10 +91,10 @@
 
   const shouldRefresh = () => {
     const last = localStorage.getItem("fundDataTimestamp");
-    return !last || Date.now() - parseInt(last) > 3600000; // 1 hour
+    return !last || Date.now() - parseInt(last) > 3600000;
   };
 
-  // 🚀 Expose All Utilities
+  // 🚀 Expose Utilities
   const FundUtils = {
     sheetID,
     apiKey,
@@ -156,20 +108,61 @@
     getCategoryAverages,
     populateCategoryFilter,
     refreshFromSheet,
-    shouldRefresh
+    shouldRefresh,
+    CATEGORY_FIELD
   };
 
-  // ✅ Attach loadFreshData after FundUtils is defined
+  // ⭐ 1️⃣ Main loader: returns ONLY funds
   FundUtils.loadFreshData = async () => {
     if (FundUtils.shouldRefresh()) {
       await FundUtils.refreshFromSheet();
     }
+
     const storedData = FundUtils.loadFromLocal("fundData");
-    if (!storedData || storedData.length < 2) {
-      console.warn("Fund data missing or malformed.");
-      return null;
+    if (!storedData || storedData.length < 1) return [];
+
+    return storedData.map(row => {
+      const obj = {};
+      FUND_SCHEMA.forEach((key, i) => obj[key] = row[i] ?? null);
+      return obj;
+    });
+  };
+
+  // ⭐ 2️⃣ New loader: INDEX DATA (Indian + US)
+  FundUtils.loadIndexData = async () => {
+    // Indian block
+    const indianRaw = await fetchFundData(sheetID, 'FinalV2!AI5:AL9', apiKey);
+
+    // US block
+    const usRaw = await fetchFundData(sheetID, 'FinalV2!AN5:AQ9', apiKey);
+
+    const final = [];
+
+    // Convert Indian block
+    if (indianRaw && indianRaw.length > 1) {
+      const headers = indianRaw[0];
+      const rows = indianRaw.slice(1);
+
+      rows.forEach(row => {
+        const obj = {};
+        headers.forEach((h, i) => obj[h] = row[i] ?? null);
+        final.push(obj);
+      });
     }
-    return storedData;
+
+    // Convert US block
+    if (usRaw && usRaw.length > 1) {
+      const headers = usRaw[0];
+      const rows = usRaw.slice(1);
+
+      rows.forEach(row => {
+        const obj = {};
+        headers.forEach((h, i) => obj[h] = row[i] ?? null);
+        final.push(obj);
+      });
+    }
+
+    return final;
   };
 
   // 🌍 Make utilities globally accessible

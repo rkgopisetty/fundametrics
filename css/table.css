@@ -238,3 +238,27 @@ table[id$="-table-wrapper"] th:nth-last-child(2) {
   text-align: left;
 }
 
+.section-header th {
+  text-align: center;
+}
+
+.group-label {
+  display: block;
+  text-align: center;
+  font-weight: 600;
+}
+
+#fundTable td:nth-child(7),
+#fundTable td:nth-child(17),
+#fundTable td:nth-child(27) {
+  border-left: 2px solid #ccc;
+}
+
+#fundTable th:nth-child(7),
+#fundTable th:nth-child(17),
+#fundTable th:nth-child(27) {
+  border-left: 2px solid #ccc;
+}
+
+
+
