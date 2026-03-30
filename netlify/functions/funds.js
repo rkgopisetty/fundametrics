@@ -36,24 +36,42 @@ exports.handler = async function (event) {
       "Referer": "https://www.moneycontrol.com/"
     };
 
-    // Safe JSON parser
-    const safeFetchJSON = async (url) => {
-      try {
-        const res = await fetch(url, { headers: FETCH_HEADERS });
-        const text = await res.text();
-
-        try {
-          return JSON.parse(text);
-        } catch (e) {
-          console.log("Invalid JSON from:", url);
-          console.log("Response snippet:", text.slice(0, 200));
-          return null;
-        }
-      } catch (err) {
-        console.log("Fetch failed:", url, err.message);
-        return null;
+   const safeFetchJSON = async (url) => {
+  try {
+    const res = await fetch(url, {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
+          "(KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
+        "Accept": "application/json, text/plain, */*",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Referer": "https://www.moneycontrol.com/",
+        "Origin": "https://www.moneycontrol.com",
+        "Connection": "keep-alive",
+        "Sec-Fetch-Dest": "empty",
+        "Sec-Fetch-Mode": "cors",
+        "Sec-Fetch-Site": "same-site",
+        "Cache-Control": "no-cache",
+        "Pragma": "no-cache"
       }
-    };
+    });
+
+    const text = await res.text();
+
+    try {
+      return JSON.parse(text);
+    } catch (e) {
+      console.log("Invalid JSON from:", url);
+      console.log("Response snippet:", text.slice(0, 200));
+      return null;
+    }
+  } catch (err) {
+    console.log("Fetch failed:", url, err.message);
+    return null;
+  }
+};
+
 
     // Fetch all pages for a tab
     const fetchAllPages = async (category, tab) => {
